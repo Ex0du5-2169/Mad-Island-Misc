@@ -15,5 +15,6 @@ Change log:
 
 14/10/2024 00:06 - Added a list of animations used for birthing and some potential replacements for Yona, need to find others for Nami, Reika et al.
                  - Annotated some of my code. It's a mess but at least you can see my intentions with the commented lines.
-                 - Changed mod name and guid.
+                 
+17/10/2024 12:31 - Changed mod name and guid.
                  - Added some test code for animation substitution.
