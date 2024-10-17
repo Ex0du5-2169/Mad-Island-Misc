@@ -85,9 +85,9 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void DeliveryPatch(SexManager __instance, CommonStates girl)
         {
-            if (girl.anim.skeleton.FindSlot("A_delivery_idle") == null)
+            /*if (girl.anim.skeleton.FindSlot("A_delivery_idle") == null)
             {
-                girl.anim.state.SetAnimation(0, "B_dogezaBack_idle", loop: true);
+                girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
             }
             if (girl.anim.skeleton.FindSlot("A_delivery_loop") == null)
             {
@@ -96,6 +96,10 @@ namespace ReikaP.Patches
             if (girl.anim.skeleton.FindSlot("A_delivery_end") == null)
             {
                 girl.anim.state.SetAnimation(0, "B_dogezaToBack", loop: true);
+            }*/
+            if (girl.anim.name.Equals("A_delivery_idle"))
+            {
+                girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
             }
         }
 
