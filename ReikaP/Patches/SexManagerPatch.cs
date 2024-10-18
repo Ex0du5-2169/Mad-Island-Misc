@@ -39,6 +39,7 @@ namespace ReikaP.Patches
                 __instance.libido = 50;
                 __instance.nMove.npcType = npcType;
                 
+
                 //Set condition for egg birth upon spike rape
 
             }

@@ -47,7 +47,7 @@ namespace ReikaP.Patches
             }
            */
             //if ((pCommon.nMove.actType == NPCMove.ActType.Wait) && (pCommon.sex == CommonStates.SexState.GameOver))
-            if ((__instance.bossBattleState == 2) && (pCommon.sex == CommonStates.SexState.GameOver))
+            if (pCommon.sex == CommonStates.SexState.GameOver)
             {
 
                 //System.Random random = new System.Random();
@@ -65,17 +65,17 @@ namespace ReikaP.Patches
 
         }
         [HarmonyPatch(typeof(StoryManager))]
-        public static void EggPregnancy(CommonStates girl)
+        public static void EggPregnancy(CommonStates girl, CommonStates __instance)
         {
             int eggStage = new int();
             eggStage = 0;
 
             eggStage++;
 
-            if (girl.pregnant[1] <= 0 && girl.anim.skeleton.FindSlot("Body_preg") == null)
+            if (__instance.anim.skeleton.FindSlot("Body_preg") == null)
             {
                 Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
             }
         }
 
@@ -85,6 +85,7 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void DeliveryPatch(SexManager __instance, CommonStates girl)
         {
+          
             /*if (girl.anim.skeleton.FindSlot("A_delivery_idle") == null)
             {
                 girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
@@ -97,14 +98,10 @@ namespace ReikaP.Patches
             {
                 girl.anim.state.SetAnimation(0, "B_dogezaToBack", loop: true);
             }*/
-            if (girl.anim.name.Equals("A_delivery_idle"))
+            // Note to self: The following looks to be how I can address and swap animations simply
+            if (girl.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null)
             {
                 girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-            }
-            // Note to self: The following looks to be how I can address and swap animations simply
-            if (girl.anim != null && girl.anim.skeleton.Data.FindAnimation("animName") != null)
-            {
-                girl.anim.state.SetAnimation(0, "animName", loop: true);
             }
         }
 
