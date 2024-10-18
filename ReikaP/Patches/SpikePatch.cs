@@ -101,6 +101,11 @@ namespace ReikaP.Patches
             {
                 girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
             }
+            // Note to self: The following looks to be how I can address and swap animations simply
+            if (girl.anim != null && girl.anim.skeleton.Data.FindAnimation("animName") != null)
+            {
+                girl.anim.state.SetAnimation(0, "animName", loop: true);
+            }
         }
 
     }
