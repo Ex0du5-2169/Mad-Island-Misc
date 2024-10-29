@@ -26,27 +26,16 @@ namespace ReikaP.Patches
     {
 
 
-        [HarmonyPatch(typeof(StoryManager))]
-        [HarmonyPatch("BossSpider")]
+        [HarmonyPatch(typeof(SexManager))]
+        [HarmonyPatch("PregnancyCheck")]
         [HarmonyPrefix]
 
 
-        public static void SpikeEggs(StoryManager __instance, CommonStates pCommon, ref int __bossBattleState)
+        public static void SpikeEggs(CommonStates girl, CommonStates pCommon)
         {
 
-            bool egged = false;
-            /*int eggs = new int();
-            eggs = 0;
+            bool creamed = false;
 
-
-            
-            if (eggs > 0)
-            {
-                egged = true;
-
-            }
-           */
-            //if ((pCommon.nMove.actType == NPCMove.ActType.Wait) && (pCommon.sex == CommonStates.SexState.GameOver))
             if (pCommon.sex == CommonStates.SexState.GameOver)
             {
 
@@ -54,28 +43,28 @@ namespace ReikaP.Patches
                 //eggs = random.Next(8);
                 //Debug.Log(egged);
                 //Debug.Log(eggs);
-                egged = true;
+                creamed = true;
+                Debug.Log(creamed);
             }
-            if (egged)
+            if (creamed)
             {
                 pCommon.pregnant[0] = 1;
+                Debug.Log(pCommon.pregnant);
             }
 
 
+            System.Random random = new System.Random();
+            int isPreg = random.Next(9);
+            Debug.Log(isPreg);
+            int pregStage = new int();
+            pregStage = 0;
+            Debug.Log(pregStage);
+            //pregStage++;
 
-        }
-        [HarmonyPatch(typeof(StoryManager))]
-        public static void EggPregnancy(CommonStates girl, CommonStates __instance)
-        {
-            int eggStage = new int();
-            eggStage = 0;
-
-            eggStage++;
-
-            if (__instance.anim.skeleton.FindSlot("Body_preg") == null)
+            if (girl.anim.skeleton.FindSlot("Body_preg") == null)
             {
                 Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
             }
         }
 
@@ -86,22 +75,18 @@ namespace ReikaP.Patches
         public static void DeliveryPatch(SexManager __instance, CommonStates girl)
         {
           
-            /*if (girl.anim.skeleton.FindSlot("A_delivery_idle") == null)
-            {
-                girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-            }
-            if (girl.anim.skeleton.FindSlot("A_delivery_loop") == null)
-            {
-                girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-            }
-            if (girl.anim.skeleton.FindSlot("A_delivery_end") == null)
-            {
-                girl.anim.state.SetAnimation(0, "B_dogezaToBack", loop: true);
-            }*/
             // Note to self: The following looks to be how I can address and swap animations simply
             if (girl.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null)
             {
                 girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+            }
+            if (girl.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null)
+            {
+                girl.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+            }
+            if (girl.anim.skeleton.Data.FindAnimation("A_delivery_end") == null)
+            {
+                girl.anim.state.SetAnimation(0, "B_dogezaToDown", loop: true);
             }
         }
 
