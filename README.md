@@ -1,6 +1,7 @@
 "# Mad-Island-Misc" 
 Mod planning:
 
+This started out as a basic mod to allow Reika to be impregnated, thus some leftover mod and variable names are still there. Naturally the early versions were janky and used for testing various functions.
 Ultimately will become a full pregnancy handler for the game.
 
 Short term plans:
@@ -9,6 +10,12 @@ Short term plans:
 2. Add "body_preg" object for Yona (and others who need one) - done - needs testing.
 3. Add birthing animation/placeholder for those who don't have one - done - needs testing.
 4. Track impregnating monster and make offspring of a similar type by overriding default birth coroutine.
+
+Long term plans:
+1. Handle all default NPC pregnancies.
+2. Handle interspecies NPC as a new feature.
+3. Create quasi-menstrual system.
+4. Add appropriate body parts for those that lack them.
 
 
 Change log:
