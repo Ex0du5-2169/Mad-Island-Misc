@@ -8,7 +8,7 @@ Short term plans:
 
 1. Add ability for Yona to become pregnant by several monsters.
 2. Add "body_preg" object for Yona (and others who need one) - done - needs testing.
-3. Add birthing animation/placeholder for those who don't have one - done - needs testing.
+3. Add birthing animation/placeholder for those who don't have one - Yona done - needs testing.
 4. Track impregnating monster and make offspring of a similar type by overriding default birth coroutine.
 
 Long term plans:
