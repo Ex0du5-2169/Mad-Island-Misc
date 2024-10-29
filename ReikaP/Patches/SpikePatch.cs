@@ -65,7 +65,7 @@ namespace ReikaP.Patches
             {
                 Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
                 __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
             }
         }
 
