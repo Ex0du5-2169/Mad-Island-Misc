@@ -96,8 +96,32 @@ namespace ReikaP.Patches
                     }
                     break;
                 case 5:
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    {
+                        __instance.anim.state.SetAnimation(0, "B_idle", loop: true);
+                    }
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    {
+                        __instance.anim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
+                    }
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    {
+                        __instance.anim.state.SetAnimation(0, "A_down_raped", loop: false);
+                    }
                     break;
                 case 6:
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    {
+                        __instance.anim.state.SetAnimation(0, "B_idle_weak", loop: true);
+                    }
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    {
+                        __instance.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
+                    }
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    {
+                        __instance.anim.state.SetAnimation(0, "B_idle_damagetoweak", loop: false);
+                    }
                     break;
             }
 
