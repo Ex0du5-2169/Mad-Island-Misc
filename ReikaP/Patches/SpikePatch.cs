@@ -31,12 +31,12 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void SpikeEggs(CommonStates girl, CommonStates pCommon)
+        public static void SpikeEggs(CommonStates girl, CommonStates pCommon, CommonStates __instance)
         {
 
             bool creamed = false;
 
-            if (pCommon.sex == CommonStates.SexState.GameOver)
+            if (__instance.sex == CommonStates.SexState.GameOver)
             {
 
                 //System.Random random = new System.Random();
@@ -48,7 +48,7 @@ namespace ReikaP.Patches
             }
             if (creamed)
             {
-                pCommon.pregnant[0] = 1;
+                __instance.pregnant[0] = 1;
                 Debug.Log(pCommon.pregnant);
             }
 
@@ -61,10 +61,11 @@ namespace ReikaP.Patches
             Debug.Log(pregStage);
             //pregStage++;
 
-            if (girl.anim.skeleton.FindSlot("Body_preg") == null)
+            if (__instance.anim.skeleton.FindSlot("Body_preg") == null)
             {
                 Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
             }
         }
 
