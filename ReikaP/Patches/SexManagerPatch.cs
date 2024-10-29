@@ -45,7 +45,7 @@ namespace ReikaP.Patches
             }
         }
 
-
+        /*
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("PregnancyCheck")]
         [HarmonyPostfix]
@@ -65,51 +65,6 @@ namespace ReikaP.Patches
             }
         }
         //The following is just a test, can remove.
-        [HarmonyPatch(typeof(SexManager))]
-        [HarmonyPatch("ManRapesSleep")]
-        [HarmonyPrefix]
-        public static void CommonSexNPCFix(SexManager __instance, CommonStates man, CommonStates girl)
-        {
-            Vector3 pos = __instance.transform.position;
-
-            if ((man != null) & (girl != null))
-            {
-                switch (girl.npcID)
-                {
-                    case 0:
-                        if (girl.pregnant[0] == -1)
-                        {
-                            __instance.tmpCommonSex = UnityEngine.Object.Instantiate(__instance.sexList[1].sexObj[4], pos, Quaternion.identity);
-
-                        }
-                        break;
-                    
-                }
-            }
-
-        }
-        /*[HarmonyPatch(typeof(SexManager))]
-        [HarmonyPatch("CommonSexPlayer")]
-        [HarmonyPrefix]
-        public static void CommonRapesNPCFix(SexManager __instance, CommonStates pCommon, CommonStates nCommon)
-        {
-
-            if ((pCommon != null) & (nCommon != null))
-            {
-                switch (pCommon.npcID)
-                {
-                    case 0:
-
-                        __instance.SexCountChange(nCommon, pCommon, SexCountState.Creampie);
-                        
-                        
-                        break;
-
-                }
-            }
-
-        }*/
-        
         [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("SexableNPC")]
         [HarmonyPostfix]
@@ -126,7 +81,7 @@ namespace ReikaP.Patches
                 }
             }
         }
-        /*[HarmonyPatch(typeof(RandomCharacter))]
+        [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
 

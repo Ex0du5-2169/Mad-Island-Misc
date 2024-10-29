@@ -31,7 +31,7 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void SpikeEggs(CommonStates girl, CommonStates pCommon, CommonStates __instance)
+        public static void SpikeEggs(CommonStates girl, CommonStates __instance)
         {
 
             bool creamed = false;
@@ -49,7 +49,7 @@ namespace ReikaP.Patches
             if (creamed)
             {
                 __instance.pregnant[0] = 1;
-                Debug.Log(pCommon.pregnant);
+                Debug.Log(__instance.pregnant);
             }
 
 
