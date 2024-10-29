@@ -36,7 +36,7 @@ namespace ReikaP.Patches
 
             bool creamed = false;
 
-            if ((__instance.sex == CommonStates.SexState.GameOver) && (sexState == SexManager.SexCountState.Creampie))
+            if ((__instance.sex == CommonStates.SexState.GameOver) || (sexState == SexManager.SexCountState.Creampie))
             {
 
                 //System.Random random = new System.Random();
@@ -60,9 +60,10 @@ namespace ReikaP.Patches
                 pregStage = 1;
                 __result = true;
                 Debug.Log(__instance.pregnant);
+                //mn.randChar.SetPregnantState(__girl, state: true);
             }
 
-            if ((__instance.anim.skeleton.FindSlot("Body_preg") == null)  && (pregStage >= 1))
+            if ((__instance.anim.skeleton.FindSlot("Body_preg") == null) && (pregStage >= 1))
             {
                 Attachment slot1 = __girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
                 __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
