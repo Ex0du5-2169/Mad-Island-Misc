@@ -75,20 +75,30 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void DeliveryPatch(SexManager __instance, CommonStates common)
         {
-          
-            // Note to self: The following looks to be how I can address and swap animations simply
-            if (common.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null)
+            switch (common.npcID)
             {
-                common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                case 0:
+                    
+                    // Note to self: The following looks to be how I can address and swap animations simply
+                    if (common.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null)
+                    {
+                        common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                    }
+                    if (common.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null)
+                    {
+                        common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                    }
+                    if (common.anim.skeleton.Data.FindAnimation("A_delivery_end") == null)
+                    {
+                        common.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
+                    }
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
             }
-            if (common.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null)
-            {
-                common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-            }
-            if (common.anim.skeleton.Data.FindAnimation("A_delivery_end") == null)
-            {
-                common.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
-            }
+
         }
 
     }
