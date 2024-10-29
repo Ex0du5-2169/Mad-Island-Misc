@@ -31,12 +31,12 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void SpikeEggs(CommonStates girl, CommonStates __instance)
+        public static void CreamSex(CommonStates __girl, CommonStates __instance, ref bool __result, SexManager.SexCountState sexState)
         {
 
             bool creamed = false;
 
-            if (__instance.sex == CommonStates.SexState.GameOver)
+            if ((__instance.sex == CommonStates.SexState.GameOver) && (sexState == SexManager.SexCountState.Creampie))
             {
 
                 //System.Random random = new System.Random();
@@ -46,12 +46,6 @@ namespace ReikaP.Patches
                 creamed = true;
                 Debug.Log(creamed);
             }
-            if (creamed)
-            {
-                __instance.pregnant[0] = 1;
-                Debug.Log(__instance.pregnant);
-            }
-
 
             System.Random random = new System.Random();
             int isPreg = random.Next(9);
@@ -61,9 +55,16 @@ namespace ReikaP.Patches
             Debug.Log(pregStage);
             //pregStage++;
 
-            if (__instance.anim.skeleton.FindSlot("Body_preg") == null)
+            if ((creamed) && (isPreg > 5))
             {
-                Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                pregStage = 1;
+                __result = true;
+                Debug.Log(__instance.pregnant);
+            }
+
+            if ((__instance.anim.skeleton.FindSlot("Body_preg") == null)  && (pregStage >= 1))
+            {
+                Attachment slot1 = __girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
                 __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
                 Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
             }
@@ -73,24 +74,24 @@ namespace ReikaP.Patches
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
-        public static void DeliveryPatch(SexManager __instance, CommonStates common)
+        public static void DeliveryPatch(CommonStates __instance, SexManager.SexCountState sexState)
         {
-            switch (common.npcID)
+            switch (__instance.npcID)
             {
                 case 0:
                     
                     // Note to self: The following looks to be how I can address and swap animations simply
-                    if (common.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null)
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
                     {
-                        common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                        __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if (common.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null)
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (sexState == SexManager.SexCountState.Delivery))
                     {
-                        common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                        __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if (common.anim.skeleton.Data.FindAnimation("A_delivery_end") == null)
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (sexState == SexManager.SexCountState.Delivery))
                     {
-                        common.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
+                        __instance.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
                     }
                     break;
                 case 5:
