@@ -18,3 +18,5 @@ Change log:
                  
 17/10/2024 12:31 - Changed mod name and guid.
                  - Added some test code for animation substitution.
+
+29/10/2024 13:28 - Started work on the basis of the new pregnancy system.
