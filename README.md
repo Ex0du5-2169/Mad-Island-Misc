@@ -13,7 +13,7 @@ Short term plans:
 
 Long term plans:
 1. Handle all default NPC pregnancies.
-2. Handle interspecies NPC as a new feature.
+2. Handle monster related pregnancies as a new feature.
 3. Create quasi-menstrual system.
 4. Add appropriate body parts for those that lack them.
 
