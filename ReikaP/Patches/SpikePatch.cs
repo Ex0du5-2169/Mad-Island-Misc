@@ -31,12 +31,13 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, CommonStates __instance, ref bool __result, SexManager.SexCountState ___sexState)
+        public static void CreamSex(CommonStates girl, CommonStates __instance, ref bool __result)
         {
 
             bool creamed = false;
+            
 
-            if ((__instance.sex == CommonStates.SexState.GameOver) || (___sexState == SexManager.SexCountState.Creampie) || (___sexState == SexManager.SexCountState.Normal))
+            if ((__instance.sex == CommonStates.SexState.GameOver) || (__instance.sex == CommonStates.SexState.Playing))
             {
 
                 //System.Random random = new System.Random();
@@ -46,6 +47,8 @@ namespace ReikaP.Patches
                 creamed = true;
                 Debug.Log(creamed);
             }
+
+            
 
             System.Random random = new System.Random();
             int isPreg = random.Next(9);
@@ -91,50 +94,51 @@ namespace ReikaP.Patches
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
-        public static void DeliveryPatch(CommonStates __instance, SexManager.SexCountState sexState)
+        public static void DeliveryPatch(CommonStates __instance)
         {
+            NPCMove aMove = __instance.nMove;
             switch (__instance.npcID)
             {
                 case 0: //Yona
                     
                     // Note to self: The following looks to be how I can address and swap animations simply
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
                     }
                     break;
                 case 5: //Reika
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "A_down_raped", loop: false);
                     }
                     break;
                 case 6: //Nami
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_weak", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (sexState == SexManager.SexCountState.Delivery))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_damagetoweak", loop: false);
                     }
