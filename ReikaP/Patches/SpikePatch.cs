@@ -31,7 +31,7 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, CommonStates __instance, ref bool __result)
+        public static void CreamSex(CommonStates girl, ref bool __result)
         {
 
             bool creamed = false;
@@ -45,34 +45,31 @@ namespace ReikaP.Patches
                 //Debug.Log(egged);
                 //Debug.Log(eggs);
                 creamed = true;
-                Debug.Log(creamed);
-            }
+                Debug.Log(creamed + ": Creampied");
+
+                System.Random random = new System.Random();
+                int isPreg = random.Next(9);
+                Debug.Log(isPreg + ": Random int, must be > 5 for pregnancy");
+                int pregStage = new int();
+                pregStage = 0;
+                Debug.Log(pregStage + ": Stage");
+                //pregStage++;
+
+                if ((creamed == true) && (isPreg >= 5))
+                {
+                    pregStage = 1;
+                    __result = true;
+                    Debug.Log(__result + ": Pregnant or not");
+                    Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
+                    
+                    //mn.randChar.SetPregnantState(__girl, state: true);
+                }
 
 
-
-            Debug.Log(creamed);
-            System.Random random = new System.Random();
-            int isPreg = random.Next(9);
-            Debug.Log(isPreg);
-            int pregStage = new int();
-            pregStage = 0;
-            Debug.Log(pregStage);
-            //pregStage++;
-
-            if ((creamed == true) && (isPreg >= 5))
-            {
-                pregStage = 1;
-                __result = true;
-                Debug.Log(girl.pregnant);
+                pregStage = 0;
                 creamed = false;
-                //mn.randChar.SetPregnantState(__girl, state: true);
+                isPreg = 0;
             }
-
-
-               pregStage = 0;
-
-               isPreg = 0;
-            
         }
 
 
@@ -135,27 +132,31 @@ namespace ReikaP.Patches
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
 
-        public static void PregStatePatch(CommonStates common, CommonStates girl)
+        public static void PregStatePatch(CommonStates common)
         {
-            if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] <= 0))
+            if (common.npcID == 15)
             {
-                Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                switch (common.npcID)
+                if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] <= 0))
                 {
-                    case 0:
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                    case 5:
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                    case 6:
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                }
 
+                    Attachment slot1 = common.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                    switch (common.npcID)
+                    {
+                        case 0:
+                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                            break;
+                        case 5:
+                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                            break;
+                        case 6:
+                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                            break;
+                    }
+
+                }
             }
         }
     }
