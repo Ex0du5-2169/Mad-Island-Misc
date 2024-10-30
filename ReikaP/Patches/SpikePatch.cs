@@ -36,7 +36,7 @@ namespace ReikaP.Patches
 
             bool creamed = false;
 
-            if ((__instance.sex == CommonStates.SexState.GameOver) || (sexState == SexManager.SexCountState.Creampie))
+            if ((__instance.sex == CommonStates.SexState.GameOver) || (sexState == SexManager.SexCountState.Creampie) || (sexState == SexManager.SexCountState.Normal))
             {
 
                 //System.Random random = new System.Random();
@@ -55,7 +55,7 @@ namespace ReikaP.Patches
             Debug.Log(pregStage);
             //pregStage++;
 
-            if ((creamed) && (isPreg > 5))
+            if ((creamed) && (isPreg > 5) && (!__result))
             {
                 pregStage = 1;
                 __result = true;
@@ -66,12 +66,28 @@ namespace ReikaP.Patches
             if ((__instance.anim.skeleton.FindSlot("Body_preg") == null) && (pregStage >= 1))
             {
                 Attachment slot1 = __girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                switch (__instance.npcID)
+                {
+                    case 0:
+                        __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
+                    case 5:
+                        __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
+                    case 6:
+                        __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
+                }
+                pregStage = 0;
+                creamed = false;
+                isPreg = 0;
             }
         }
 
-        // The following is just a list of birth animations and their possible replacements. I will need to check them out in the gallery before I make a final decision. The code below is likely wrong, it's placeholder for now.
+        
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
@@ -79,7 +95,7 @@ namespace ReikaP.Patches
         {
             switch (__instance.npcID)
             {
-                case 0:
+                case 0: //Yona
                     
                     // Note to self: The following looks to be how I can address and swap animations simply
                     if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
@@ -95,7 +111,7 @@ namespace ReikaP.Patches
                         __instance.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
                     }
                     break;
-                case 5:
+                case 5: //Reika
                     if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle", loop: true);
@@ -109,7 +125,7 @@ namespace ReikaP.Patches
                         __instance.anim.state.SetAnimation(0, "A_down_raped", loop: false);
                     }
                     break;
-                case 6:
+                case 6: //Nami
                     if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (sexState == SexManager.SexCountState.Delivery))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_weak", loop: true);
