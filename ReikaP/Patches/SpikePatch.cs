@@ -35,7 +35,7 @@ namespace ReikaP.Patches
         {
 
             bool creamed = false;
-            
+
 
             if (!__result)
             {
@@ -48,7 +48,7 @@ namespace ReikaP.Patches
                 Debug.Log(creamed);
             }
 
-            
+
 
             Debug.Log(creamed);
             System.Random random = new System.Random();
@@ -68,31 +68,14 @@ namespace ReikaP.Patches
                 //mn.randChar.SetPregnantState(__girl, state: true);
             }
 
-            if ((girl.anim.skeleton.FindSlot("Body_preg") == null) && (pregStage >= 1))
-            {
-                Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                switch (girl.npcID)
-                {
-                    case 0:
-                        __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                    case 5:
-                        __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                    case 6:
-                        __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(__instance.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                }
-                pregStage = 0;
 
-                isPreg = 0;
-            }
+               pregStage = 0;
+
+               isPreg = 0;
+            
         }
 
-        
+
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
@@ -102,7 +85,7 @@ namespace ReikaP.Patches
             switch (__instance.npcID)
             {
                 case 0: //Yona
-                    
+
                     // Note to self: The following looks to be how I can address and swap animations simply
                     if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
                     {
@@ -148,6 +131,32 @@ namespace ReikaP.Patches
             }
 
         }
+        [HarmonyPatch(typeof(RandomCharacter))]
+        [HarmonyPatch("SetPregnantState")]
+        [HarmonyPrefix]
 
+        public static void PregStatePatch(CommonStates common, CommonStates girl)
+        {
+            if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] <= 0))
+            {
+                Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                switch (common.npcID)
+                {
+                    case 0:
+                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
+                    case 5:
+                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
+                    case 6:
+                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
+                }
+
+            }
+        }
     }
 }
