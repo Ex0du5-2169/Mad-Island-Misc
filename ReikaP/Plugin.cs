@@ -40,7 +40,7 @@ namespace ReikaP
             string text2 = location.TrimEnd(text.ToCharArray());
 
             harmony.PatchAll(typeof(ReikaBase));
-            //harmony.PatchAll(typeof(SexManagerPatch));
+            harmony.PatchAll(typeof(SpikePatch));
             harmony.PatchAll(typeof(AltPatch));
             mls.LogInfo("Fill them up.");
         }

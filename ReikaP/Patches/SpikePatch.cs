@@ -31,12 +31,12 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates __girl, CommonStates __instance, ref bool __result, SexManager.SexCountState sexState)
+        public static void CreamSex(CommonStates girl, CommonStates __instance, ref bool __result, SexManager.SexCountState ___sexState)
         {
 
             bool creamed = false;
 
-            if ((__instance.sex == CommonStates.SexState.GameOver) || (sexState == SexManager.SexCountState.Creampie) || (sexState == SexManager.SexCountState.Normal))
+            if ((__instance.sex == CommonStates.SexState.GameOver) || (___sexState == SexManager.SexCountState.Creampie) || (___sexState == SexManager.SexCountState.Normal))
             {
 
                 //System.Random random = new System.Random();
@@ -65,7 +65,7 @@ namespace ReikaP.Patches
 
             if ((__instance.anim.skeleton.FindSlot("Body_preg") == null) && (pregStage >= 1))
             {
-                Attachment slot1 = __girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
                 switch (__instance.npcID)
                 {
                     case 0:
