@@ -37,7 +37,7 @@ namespace ReikaP.Patches
             bool creamed = false;
             
 
-            if ((__instance.sex == CommonStates.SexState.GameOver) || (__instance.sex == CommonStates.SexState.Playing))
+            if (!__result)
             {
 
                 //System.Random random = new System.Random();
@@ -50,6 +50,7 @@ namespace ReikaP.Patches
 
             
 
+            Debug.Log(creamed);
             System.Random random = new System.Random();
             int isPreg = random.Next(9);
             Debug.Log(isPreg);
@@ -58,11 +59,12 @@ namespace ReikaP.Patches
             Debug.Log(pregStage);
             //pregStage++;
 
-            if ((creamed) && (isPreg > 5) && (!__result))
+            if ((creamed == true) && (isPreg >= 5))
             {
                 pregStage = 1;
                 __result = true;
                 Debug.Log(__instance.pregnant);
+                creamed = false;
                 //mn.randChar.SetPregnantState(__girl, state: true);
             }
 
@@ -85,7 +87,7 @@ namespace ReikaP.Patches
                         break;
                 }
                 pregStage = 0;
-                creamed = false;
+
                 isPreg = 0;
             }
         }
