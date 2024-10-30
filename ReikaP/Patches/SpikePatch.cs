@@ -63,15 +63,15 @@ namespace ReikaP.Patches
             {
                 pregStage = 1;
                 __result = true;
-                Debug.Log(__instance.pregnant);
+                Debug.Log(girl.pregnant);
                 creamed = false;
                 //mn.randChar.SetPregnantState(__girl, state: true);
             }
 
-            if ((__instance.anim.skeleton.FindSlot("Body_preg") == null) && (pregStage >= 1))
+            if ((girl.anim.skeleton.FindSlot("Body_preg") == null) && (pregStage >= 1))
             {
                 Attachment slot1 = girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                switch (__instance.npcID)
+                switch (girl.npcID)
                 {
                     case 0:
                         __instance.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
