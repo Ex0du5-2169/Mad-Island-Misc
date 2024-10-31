@@ -148,6 +148,7 @@ namespace ReikaP.Patches
                         case 5:
                             common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
                             Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                            
                             break;
                         case 6:
                             common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);

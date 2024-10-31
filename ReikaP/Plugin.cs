@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReikaP.Patches;
+using Spine.Unity;
 
 namespace ReikaP
 {
@@ -22,6 +23,7 @@ namespace ReikaP
         private static ReikaBase Instance;
 
         internal ManualLogSource mls;
+        
 
 
 
@@ -33,8 +35,8 @@ namespace ReikaP
             }
 
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-
-            mls.LogInfo("Reika Pregnancy Enabler");
+            
+            mls.LogInfo("Mad Island Universal Pregnancy Enabler");
             string location = ((BaseUnityPlugin)Instance).Info.Location;
             string text = "ReikaP.dll";
             string text2 = location.TrimEnd(text.ToCharArray());
