@@ -47,8 +47,8 @@ namespace ReikaP.Patches
                 creamed = true;
                 Debug.Log(creamed + ": Creampied");
 
-                System.Random random = new System.Random();
-                int isPreg = random.Next(9);
+                //System.Random random = new System.Random();
+                int isPreg = UnityEngine.Random.Range(0, 9);
                 Debug.Log(isPreg + ": Random int, must be > 5 for pregnancy");
                 int pregStage = new int();
                 pregStage = 0;
@@ -60,12 +60,11 @@ namespace ReikaP.Patches
                     pregStage = 1;
                     __result = true;
                     Debug.Log(__result + ": Pregnant or not");
-                    Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
 
-
+                Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
                 pregStage = 0;
                 creamed = false;
                 isPreg = 0;
@@ -127,7 +126,7 @@ namespace ReikaP.Patches
                     break;
             }
 
-        }
+        }/*
         [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
@@ -158,6 +157,6 @@ namespace ReikaP.Patches
 
                 }
             }
-        }
+        }*/
     }
 }
