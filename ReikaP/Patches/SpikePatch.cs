@@ -83,43 +83,43 @@ namespace ReikaP.Patches
                 case 0: //Yona
 
                     // Note to self: The following looks to be how I can address and swap animations simply
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
                     }
                     break;
                 case 5: //Reika
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "A_down_raped", loop: false);
                     }
                     break;
                 case 6: //Nami
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_idle") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_weak", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_damagetoweak", loop: false);
                     }
