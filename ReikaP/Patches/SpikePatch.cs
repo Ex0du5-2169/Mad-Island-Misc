@@ -57,18 +57,18 @@ namespace ReikaP.Patches
                 if ((creamed == true) && (isPreg >= 11))
                 {
                     pregStage = 12;
-                    Debug.Log(pregStage + ": Stage, ignore, not needed yet");
+                    Debug.Log(pregStage + ": Staging, ignore, not needed yet");
                     __result = true;
                     Debug.Log(__result + ": Pregnant or not");
                     girl.pregnant[1] = pregStage;
                     girl.pregnant[0] = man.friendID;
+                    Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
+                    Debug.Log(girl.pregnant[0] + ": Return ID of potential father");
                     mn.uiMN.FriendHealthCheck(girl);
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
 
-                Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
-                Debug.Log(girl.pregnant[0] + ": Return ID of potential father");
                 pregStage = 0;
                 creamed = false;
                 isPreg = 0;
