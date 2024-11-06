@@ -135,12 +135,12 @@ public class SkinManager : MonoBehaviour
             v = 1f,
             u2 = 1f,
             v2 = 0f,
-            width = 320,
-            height = 374,
-            originalWidth = 448,
-            originalHeight = 802,
+            width = texture.width,
+            height = texture.height,
+            originalWidth = texture.width,
+            originalHeight = texture.height,
             offsetX = 0f,
-            offsetY = 107f
+            offsetY = 0f
         };
 
         return region;
