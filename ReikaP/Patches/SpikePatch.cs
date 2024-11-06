@@ -68,6 +68,7 @@ namespace ReikaP.Patches
                 }
 
                 Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
+                Debug.Log(girl.pregnant[0] + ": Return ID of potential father");
                 pregStage = 0;
                 creamed = false;
                 isPreg = 0;
