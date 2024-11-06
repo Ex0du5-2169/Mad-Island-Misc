@@ -49,13 +49,13 @@ namespace ReikaP.Patches
                 Debug.Log(creamed + ": Creampied");
 
                 //System.Random random = new System.Random();
-                int isPreg = UnityEngine.Random.Range(0, 9);
+                int isPreg = UnityEngine.Random.Range(0, 15);
                 Debug.Log(isPreg + ": Random int, must be > 5 for pregnancy");
                 int pregStage = new int();
                 pregStage = 0;
                 //pregStage++;
 
-                if ((creamed == true) && (isPreg >= 5))
+                if ((creamed == true) && (isPreg >= 11))
                 {
                     pregStage = 1;
                     Debug.Log(pregStage + ": Stage, ignore, not needed yet");
