@@ -32,11 +32,10 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, ref bool __result)
+        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript mn)
         {
 
             bool creamed = false;
-
 
             if (!__result)
             {
@@ -61,7 +60,9 @@ namespace ReikaP.Patches
                     Debug.Log(pregStage + ": Stage, ignore, not needed yet");
                     __result = true;
                     Debug.Log(__result + ": Pregnant or not");
-                    //girl.pregnant[1] = pregStage;
+                    girl.pregnant[1] = pregStage;
+                    girl.pregnant[0] = man.friendID;
+                    mn.uiMN.FriendHealthCheck(girl);
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
