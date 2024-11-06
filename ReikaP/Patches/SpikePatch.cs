@@ -127,7 +127,7 @@ namespace ReikaP.Patches
                     break;
             }
 
-        }
+        }/*
         [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
@@ -159,6 +159,6 @@ namespace ReikaP.Patches
 
                 }
             
-        }
+        }*/
     }
 }
