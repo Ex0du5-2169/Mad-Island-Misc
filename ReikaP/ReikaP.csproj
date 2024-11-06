@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patches\AltPatch.cs" />
+    <Compile Include="Patches\AtlasPatch.cs" />
     <Compile Include="Patches\SpikePatch.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Patches\SexManagerPatch.cs" />
