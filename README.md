@@ -6,9 +6,9 @@ Ultimately will become a full pregnancy handler for the game.
 
 Short term plans:
 
-1. Add ability for Yona to become pregnant by several monsters.
-2. Add "body_preg" object for Yona (and others who need one) - done - needs testing.
-3. Add birthing animation/placeholder for those who don't have one - Yona done - needs testing.
+1. Add ability for Yona and others to become pregnant by several NPCs/monsters - basic code in place - needs further testing.
+2. Add "body_preg" object for Yona (and others who need one) - in-progress.
+3. Add birthing animation/placeholder for those who don't have one - Yona, Reika and Nami done - needs testing.
 4. Track impregnating monster and make offspring of a similar type by overriding default birth coroutine.
 
 Long term plans:
@@ -28,3 +28,6 @@ Change log:
 
 29/10/2024 13:28 - Started work on the basis of the new pregnancy system.
                  - Removed some useless scripts and changed some variable names.
+
+06/11/2024 09:35 - Basic pregnancy system in-place, needs testing.
+                 - Atlas modifying code provided by NM088, needs altering for the purposes of this mod.
