@@ -58,7 +58,7 @@ namespace ReikaP.Patches
                 if ((creamed == true) && (isPreg >= 5))
                 {
                     pregStage = 1;
-                    Debug.Log(pregStage + ": Stage, not needed yet");
+                    Debug.Log(pregStage + ": Stage, ignore, not needed yet");
                     __result = true;
                     Debug.Log(__result + ": Pregnant or not");
                     
