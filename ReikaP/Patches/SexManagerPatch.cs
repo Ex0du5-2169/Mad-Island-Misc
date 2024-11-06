@@ -36,13 +36,15 @@ namespace ReikaP.Patches
             {
                 case 0:
                     __instance.employ = CommonStates.Employ.Friend;
-                    
+                    __instance.pregnant[0] = 0;
                     break;
                 case 5:
                     __instance.employ = CommonStates.Employ.Friend;
+                    __instance.pregnant[0] = 0;
                     break;
                 case 6:
                     __instance.employ = CommonStates.Employ.Friend;
+                    __instance.pregnant[0] = 0;
                     break;
 
             }
@@ -67,7 +69,7 @@ namespace ReikaP.Patches
                         break;
                 }
             }
-        }
+        }*/
         //The following is just a test, can remove.
         [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("SexableNPC")]
@@ -84,7 +86,7 @@ namespace ReikaP.Patches
                         break;
                 }
             }
-        }
+        }/*
         [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
