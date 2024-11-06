@@ -31,22 +31,26 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void NPCSettingsFix(CommonStates __instance)
         {
-            NPCMove.NPCType npcType = NPCMove.NPCType.Friend;
 
-            if (__instance.npcID == 0)
+            switch (__instance.npcID)
             {
-                __instance.maxLibido = 100f;
-                __instance.libido = 50;
-                __instance.nMove.npcType = npcType;
-                
-
-                //Set condition for egg birth upon spike rape
+                case 0:
+                    __instance.employ = CommonStates.Employ.Friend;
+                    
+                    break;
+                case 5:
+                    __instance.employ = CommonStates.Employ.Friend;
+                    break;
+                case 6:
+                    __instance.employ = CommonStates.Employ.Friend;
+                    break;
 
             }
-        }
 
-        /*
-        [HarmonyPatch(typeof(SexManager))]
+        }/*
+
+        
+        [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("PregnancyCheck")]
         [HarmonyPostfix]
         public static void PregFix(SexManager __instance, ref bool __result, CommonStates girl)

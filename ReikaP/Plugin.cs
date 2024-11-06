@@ -42,16 +42,14 @@ namespace ReikaP
             mls.LogInfo("Mad Island Universal Pregnancy Enabler");
             string location = ((BaseUnityPlugin)Instance).Info.Location;
             string text = "ReikaP.dll";
-            /*string text2 = location.TrimEnd(text.ToCharArray());
-            string text3 = text2 + "MIUPEAssets";
-            AssetBundle val = AssetBundle.LoadFromFile(text3);
-            if (val == null)
+
+            if (text == null)
             {
-                mls.LogError("Failed to load assets!");
+                mls.LogError("Failed to load mod!");
                 return;
-            }*/
+            }
 
-
+            harmony.PatchAll(typeof(SexManager));
             harmony.PatchAll(typeof(ReikaBase));
             harmony.PatchAll(typeof(SpikePatch));
             harmony.PatchAll(typeof(AltPatch));

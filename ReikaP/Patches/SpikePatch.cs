@@ -50,17 +50,18 @@ namespace ReikaP.Patches
 
                 //System.Random random = new System.Random();
                 int isPreg = UnityEngine.Random.Range(0, 15);
-                Debug.Log(isPreg + ": Random int, must be > 5 for pregnancy");
+                Debug.Log(isPreg + ": Random int, must be > 11 for pregnancy");
                 int pregStage = new int();
                 pregStage = 0;
                 //pregStage++;
 
                 if ((creamed == true) && (isPreg >= 11))
                 {
-                    pregStage = 1;
+                    pregStage = 12;
                     Debug.Log(pregStage + ": Stage, ignore, not needed yet");
                     __result = true;
                     Debug.Log(__result + ": Pregnant or not");
+                    //girl.pregnant[1] = pregStage;
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
