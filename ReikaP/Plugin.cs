@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using ReikaP.Patches;
 using Spine.Unity;
 using UnityEngine;
+using Spine;
+
 
 
 namespace ReikaP
@@ -25,7 +27,6 @@ namespace ReikaP
         private static ReikaBase Instance;
 
         internal ManualLogSource mls;
-        
 
 
 
@@ -49,7 +50,6 @@ namespace ReikaP
                 mls.LogError("Failed to load assets!");
                 return;
             }
-
 
 
             harmony.PatchAll(typeof(ReikaBase));
