@@ -10,7 +10,7 @@ using ReikaP.Patches;
 using Spine.Unity;
 using UnityEngine;
 using Spine;
-
+//Set a reference for nm088's framework when it's ready
 
 
 namespace ReikaP
@@ -49,8 +49,9 @@ namespace ReikaP
                 return;
             }
 
-            harmony.PatchAll(typeof(SexManager));
             harmony.PatchAll(typeof(ReikaBase));
+            //harmony.PatchAll(typeof(AtlasPatch)); //Set patch for any eventual hooks into nm088's code.
+            harmony.PatchAll(typeof(SexManager));
             harmony.PatchAll(typeof(SpikePatch));
             harmony.PatchAll(typeof(AltPatch));
             mls.LogInfo("Fill them up.");
