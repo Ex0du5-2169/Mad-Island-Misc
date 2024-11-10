@@ -37,34 +37,34 @@ namespace ReikaP.Patches
 
             bool creamed = false;
 
-            if (!__result)
+            if (!__result) //If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls, next update I will further qualify this to avoid double dipping like that.
             {
 
                 //System.Random random = new System.Random();
                 //eggs = random.Next(8);
                 //Debug.Log(egged);
                 //Debug.Log(eggs);
-                creamed = true;
+                creamed = true; //Must have taken an action that gives the creampie state, for now we have given it that state through other means.
                 Debug.Log(creamed + ": Creampied");
 
                 //System.Random random = new System.Random();
-                int isPreg = UnityEngine.Random.Range(0, 15);
+                int isPreg = UnityEngine.Random.Range(0, 15); //Set a random range for preg chance
                 Debug.Log(isPreg + ": Random int, must be > 11 for pregnancy");
-                int pregStage = new int();
+                int pregStage = new int(); //eventually will become part of a mentstrual system, for now it's only used to hold an int for the game's preg system to receive.
                 pregStage = 0;
                 //pregStage++;
 
-                if ((creamed == true) && (isPreg >= 11))
+                if ((creamed == true) && (isPreg >= 11)) //Tests whether creampied and if the RNG allows it, for now. Later it will test creampied vs the mentstrual stage plus some RNG.
                 {
                     pregStage = 12;
                     Debug.Log(pregStage + ": Staging, ignore, not needed yet");
-                    __result = true;
+                    __result = true; //The base game purposely sets the result as false for Yona et al. Here we force it to true, but this alone won't trigger pregnancy so we continue below.
                     Debug.Log(__result + ": Pregnant or not");
-                    girl.pregnant[1] = pregStage;
-                    girl.pregnant[0] = man.friendID;
+                    girl.pregnant[1] = pregStage; //Trigger the game's pregnancy system.
+                    girl.pregnant[0] = man.friendID; //Pregnancy system requires the father be set.
                     Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
                     Debug.Log(girl.pregnant[0] + ": Return ID of potential father");
-                    mn.uiMN.FriendHealthCheck(girl);
+                    mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
