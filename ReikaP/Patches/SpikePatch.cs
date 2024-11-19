@@ -69,7 +69,7 @@ namespace ReikaP.Patches
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
 
-                pregStage = 0;
+                pregStage = 0; //Reset used variables, just in case.
                 creamed = false;
                 isPreg = 0;
             }
