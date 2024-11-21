@@ -32,12 +32,17 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn, SexManager.SexCountState sexState)
+        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn)
         {
 
             bool creamed = false;
+            bool raped = false;
+            if (girl.lovers[man.npcID].sexCount[2] == girl.lovers[man.npcID].sexCount[2]++)
+            {
+                raped = true;
+            }
 
-            if ((!__result) || (girl.npcID == 0 && sexState == SexManager.SexCountState.Rapes))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls, also tests for Yona being raped
+            if ((!__result) || (raped))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
             {
 
                 //System.Random random = new System.Random();
@@ -99,6 +104,7 @@ namespace ReikaP.Patches
                 }
                 pregStage = 0; //Reset used variables, just in case.
                 creamed = false;
+                raped = false;
                 isPreg = 0;
             }
         }
