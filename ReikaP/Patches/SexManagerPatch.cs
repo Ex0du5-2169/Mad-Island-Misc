@@ -36,15 +36,15 @@ namespace ReikaP.Patches
             {
                 case 0:
                     __instance.employ = CommonStates.Employ.Friend;
-                    __instance.pregnant[0] = 0;
+
                     break;
                 case 5:
                     __instance.employ = CommonStates.Employ.Friend;
-                    __instance.pregnant[0] = 0;
+
                     break;
                 case 6:
                     __instance.employ = CommonStates.Employ.Friend;
-                    __instance.pregnant[0] = 0;
+
                     break;
 
             }
