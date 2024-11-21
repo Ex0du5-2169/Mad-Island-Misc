@@ -32,7 +32,7 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript mn)
+        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn)
         {
 
             bool creamed = false;
@@ -64,11 +64,15 @@ namespace ReikaP.Patches
                     girl.pregnant[0] = man.friendID; //Pregnancy system requires the father be set.
                     Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
                     Debug.Log(girl.pregnant[0] + ": Return ID of potential father");
-                    mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
+                    ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
 
+                if (girl.pregnant[1] == pregStage)
+                {
+                    ___mn.sound.GoSound(108, girl.transform.position, randomPitch: false); //play sound on successful impregnation.
+                }
                 pregStage = 0; //Reset used variables, just in case.
                 creamed = false;
                 isPreg = 0;
@@ -130,7 +134,7 @@ namespace ReikaP.Patches
                     break;
             }
 
-        }/*
+        }
         [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
@@ -162,6 +166,6 @@ namespace ReikaP.Patches
 
                 }
             
-        }*/
+        }
     }
 }
