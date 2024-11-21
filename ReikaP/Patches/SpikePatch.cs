@@ -25,7 +25,46 @@ namespace ReikaP.Patches
 
     internal class SpikePatch
     {
+        public static bool raped1 = false;
 
+        /*
+        void ApplyCustomClothToPlayer(bool looping)
+        {
+            if (looping)
+                Logger.Log("Part updated");
+
+            if (playerCommonState == null)
+            {
+                Logger.LogError("Player's CommonState is null.");
+                return;
+            }
+
+            SkeletonAnimation skeletonAnim = playerCommonState.anim;
+
+            if (skeletonAnim == null)
+            {
+                Logger.LogError("SkeletonAnimation component not found on the player's CommonStates.");
+                return;
+            }
+            List<string> partsToApply = new List<string> { "body_preg" };
+            SkinManager.Instance.ApplyModSkin("yona_reskin001", "yona", skeletonAnim, partsToApply, true);
+        }*/
+
+        [HarmonyPatch(typeof(SexManager))]
+        [HarmonyPatch("PlayerRaped")]
+        [HarmonyPrefix]
+
+        public static void Raped(CommonStates to)
+        {
+        if (to.sex == CommonStates.SexState.GameOver)
+            {
+                raped1 = true;
+            }
+        else
+            {
+                raped1 = false;
+            }
+        }
 
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("PregnancyCheck")]
@@ -34,15 +73,10 @@ namespace ReikaP.Patches
 
         public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn)
         {
-
             bool creamed = false;
-            bool raped = false;
-            if (girl.lovers[man.npcID].sexCount[2] == girl.lovers[man.npcID].sexCount[2]++)
-            {
-                raped = true;
-            }
 
-            if ((!__result) || (raped))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
+
+            if ((!__result) || (raped1))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
             {
 
                 //System.Random random = new System.Random();
@@ -104,7 +138,7 @@ namespace ReikaP.Patches
                 }
                 pregStage = 0; //Reset used variables, just in case.
                 creamed = false;
-                raped = false;
+                raped1 = false;
                 isPreg = 0;
             }
         }
