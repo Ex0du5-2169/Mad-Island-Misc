@@ -37,7 +37,7 @@ namespace ReikaP.Patches
 
             bool creamed = false;
 
-            if (!__result) //If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls, next update I will further qualify this to avoid double dipping like that.
+            if ((!__result) || (girl.sex == CommonStates.SexState.GameOver))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls, next update I will further qualify this to avoid double dipping like that.
             {
 
                 //System.Random random = new System.Random();
@@ -68,6 +68,7 @@ namespace ReikaP.Patches
                     
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
+
 
                 if (girl.pregnant[1] == 12)
                 {
