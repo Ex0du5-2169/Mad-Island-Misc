@@ -19,6 +19,7 @@ using UnityEngine.Animations;
 using Spine.Unity;
 using Spine;
 using ReikaP;
+using static SexManager;
 
 namespace ReikaP.Patches
 {
@@ -54,18 +55,17 @@ namespace ReikaP.Patches
         [HarmonyPatch("PlayerRaped")]
         [HarmonyPrefix]
 
-        public static void Raped(CommonStates to)
+        public static void Raped(CommonStates to, CommonStates from, SexManager __instance)
         {
-        if (to.sex == CommonStates.SexState.GameOver)
+            
+
+            if (from.anim.AnimationName == "A_Finish_Idle")
             {
                 raped1 = true;
+                __instance.PregnancyCheck(to, from);
             }
-        else
-            {
-                raped1 = false;
-            }
-        }
 
+        }
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("PregnancyCheck")]
         [HarmonyPrefix]
@@ -104,7 +104,8 @@ namespace ReikaP.Patches
                     Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
                     Debug.Log(girl.pregnant[0] + ": Return ID of potential father");
                     ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
-                    
+
+
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
 
@@ -112,29 +113,6 @@ namespace ReikaP.Patches
                 if (girl.pregnant[1] == 12)
                 {
                     ___mn.sound.GoSound(108, girl.transform.position, randomPitch: true); //play sound on successful impregnation.
-                    if ((girl.anim.skeleton.FindSlot("Body_preg") == null) && (girl.pregnant[1] < 0))
-                    {
-                        CommonStates common1 = new CommonStates();
-                        common1.npcID = 15;
-                        Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                        switch (girl.npcID)
-                        {
-                            case 0: //Yona
-                                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                                break;
-                            case 5: //Reika
-                                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-
-                                break;
-                            case 6: //Nami
-                                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                                break;
-                        }
-
-                    }
                 }
                 pregStage = 0; //Reset used variables, just in case.
                 creamed = false;
