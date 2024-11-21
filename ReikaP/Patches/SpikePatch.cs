@@ -32,12 +32,12 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn)
+        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn, SexManager.SexCountState sexState)
         {
 
             bool creamed = false;
 
-            if ((!__result) || (girl.sex == CommonStates.SexState.GameOver))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls, next update I will further qualify this to avoid double dipping like that.
+            if ((!__result) || (girl.npcID == 0 && sexState == SexManager.SexCountState.Rapes))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls, also tests for Yona being raped
             {
 
                 //System.Random random = new System.Random();
