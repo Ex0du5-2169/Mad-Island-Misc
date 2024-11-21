@@ -57,7 +57,7 @@ namespace ReikaP.Patches
 
         public static void Raped(CommonStates to, CommonStates from, SexManager __instance)
         {
-            
+
 
             if (from.anim.AnimationName == "A_Finish_Idle")
             {
@@ -66,6 +66,7 @@ namespace ReikaP.Patches
             }
 
         }
+
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("PregnancyCheck")]
         [HarmonyPrefix]
@@ -137,11 +138,11 @@ namespace ReikaP.Patches
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
                     }
@@ -151,11 +152,11 @@ namespace ReikaP.Patches
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "A_down_raped", loop: false);
                     }
@@ -165,11 +166,11 @@ namespace ReikaP.Patches
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_weak", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_loop") == null) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
                     }
-                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (aMove.actType == NPCMove.ActType.Wait) && (__instance.pregnant[0] != -1))
+                    if ((__instance.anim.skeleton.Data.FindAnimation("A_delivery_end") == null) && (__instance.pregnant[0] != -1))
                     {
                         __instance.anim.state.SetAnimation(0, "B_idle_damagetoweak", loop: false);
                     }
