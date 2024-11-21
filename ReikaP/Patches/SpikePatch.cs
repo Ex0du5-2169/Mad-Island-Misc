@@ -69,9 +69,32 @@ namespace ReikaP.Patches
                     //mn.randChar.SetPregnantState(__girl, state: true);
                 }
 
-                if (girl.pregnant[1] == pregStage)
+                if (girl.pregnant[1] == 12)
                 {
-                    ___mn.sound.GoSound(108, girl.transform.position, randomPitch: false); //play sound on successful impregnation.
+                    ___mn.sound.GoSound(108, girl.transform.position, randomPitch: true); //play sound on successful impregnation.
+                    if ((girl.anim.skeleton.FindSlot("Body_preg") == null) && (girl.pregnant[1] < 0))
+                    {
+                        CommonStates common1 = new CommonStates();
+                        common1.npcID = 15;
+                        Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                        switch (girl.npcID)
+                        {
+                            case 0: //Yona
+                                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                                break;
+                            case 5: //Reika
+                                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+
+                                break;
+                            case 6: //Nami
+                                girl.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                                Debug.Log(girl.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                                break;
+                        }
+
+                    }
                 }
                 pregStage = 0; //Reset used variables, just in case.
                 creamed = false;
@@ -134,7 +157,7 @@ namespace ReikaP.Patches
                     break;
             }
 
-        }
+        }/*
         [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
@@ -166,6 +189,6 @@ namespace ReikaP.Patches
 
                 }
             
-        }
+        }*/
     }
 }
