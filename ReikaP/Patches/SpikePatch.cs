@@ -27,6 +27,7 @@ namespace ReikaP.Patches
     internal class SpikePatch
     {
         public static bool raped1 = false;
+        public static bool creamed = false;
 
         /*
         void ApplyCustomClothToPlayer(bool looping)
@@ -51,8 +52,32 @@ namespace ReikaP.Patches
             SkinManager.Instance.ApplyModSkin("yona_reskin001", "yona", skeletonAnim, partsToApply, true);
         }*/
 
+        /*[HarmonyPatch(typeof(SexManager))]
+        [HarmonyPatch("SexCountDataChange")]
+        [HarmonyPrefix]
+
+        public static void DataChange(CommonStates to, CommonStates from, SexCountState sexState, ref ManagersScript ___mn)
+        {
+            int index = -1;
+            to.LoveChange(from, 0f);
+            int currentR = new int();
+            int currentC = new int();
+            //int currentT = new int();
+            currentR = to.lovers[index].sexCount[2];
+            currentC = to.lovers[index].sexCount[6];
+            //currentT = to.lovers[index].sexCount[4];
+            if (from != null)
+            {
+                index = ___mn.npcMN.GetLoversID(to, from.friendID);
+            }
+            if ((currentR == to.lovers[index].sexCount[2]++) || (currentC == to.lovers[index].sexCount[6]++))
+            {
+                creamed = true;
+            }
+        }*/
+
         [HarmonyPatch(typeof(SexManager))]
-        [HarmonyPatch("PlayerRaped")]
+        [HarmonyPatch("SexCountDataChange")]
         [HarmonyPrefix]
 
         public static void Raped(CommonStates to, CommonStates from, SexManager __instance)
@@ -72,9 +97,9 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn)
+        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn, SexManager __instance)
         {
-            bool creamed = false;
+            
 
 
             if ((!__result) || (raped1))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
@@ -108,6 +133,7 @@ namespace ReikaP.Patches
 
 
                     //mn.randChar.SetPregnantState(__girl, state: true);
+                    __instance.Pregnancy(girl, man, state: true);
                 }
 
 
