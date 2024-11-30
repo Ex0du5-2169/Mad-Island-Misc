@@ -77,7 +77,7 @@ namespace ReikaP.Patches
         }*/
 
         [HarmonyPatch(typeof(SexManager))]
-        [HarmonyPatch("SexCountDataChange")]
+        [HarmonyPatch("PlayerRaped")]
         [HarmonyPrefix]
 
         public static void Raped(CommonStates to, CommonStates from, SexManager __instance)
