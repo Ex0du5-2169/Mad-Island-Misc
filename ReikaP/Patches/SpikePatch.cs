@@ -231,43 +231,43 @@ namespace ReikaP.Patches
                     
                     if (baseAnim.AnimationName == delI)
                     {
-                        baseAnim.AnimationName = "B_dogeza_idle";
+                        baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
                     if (baseAnim.AnimationName == delL)
                     {
-                        baseAnim.AnimationName = "B_dogeza_idle";
+                        baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
                     if (baseAnim.AnimationName == delE)
                     {
-                        baseAnim.AnimationName = "B_dogezaToDown";
+                        baseAnim.state.SetAnimation(0, "B_dogezaToDown", loop: true);
                     }
                         break;
                 case 5: //Reika
                     if (baseAnim.AnimationName == delI)
                     {
-                        baseAnim.AnimationName = "B_idle";
+                        baseAnim.state.SetAnimation(0, "B_idle", loop: true);
                     }
                     if (baseAnim.AnimationName == delL)
                     {
-                        baseAnim.AnimationName = "A_down_drug_idle";
+                        baseAnim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
                     }
                     if (baseAnim.AnimationName == delE)
                     {
-                        baseAnim.AnimationName = "A_down_raped";
+                        baseAnim.state.SetAnimation(0, "A_down_raped", loop: true);
                     }
                     break;
                 case 6: //Nami
                     if (baseAnim.AnimationName == delI)
                     {
-                        baseAnim.AnimationName = "B_idle_weak";
+                        baseAnim.state.SetAnimation(0, "B_idle_weak", loop: true);
                     }
                     if (baseAnim.AnimationName == delL)
                     {
-                        baseAnim.AnimationName = "B_idle_damage";
+                        baseAnim.state.SetAnimation(0, "B_idle_damage", loop: true);
                     }
                     if (baseAnim.AnimationName == delE)
                     {
-                        baseAnim.AnimationName = "B_idle_damagetoweak";
+                        baseAnim.state.SetAnimation(0, "B_idle_damagetoweak", loop: true);
                     }
                     break;
             }
