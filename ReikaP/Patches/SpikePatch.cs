@@ -187,12 +187,16 @@ namespace ReikaP.Patches
                             ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
 
 
-                            //mn.randChar.SetPregnantState(__girl, state: true);
-                            if (getsIt.npcID == 0)
+
+                        if (givesIt.npcID == 0)
                                 {
-                                    __instance.Pregnancy(givesIt, getsIt, state: true);
+                                __instance.Pregnancy(givesIt, getsIt, state: true); //This section checks for Yona initiating sex and changes her to receiver for pregnancy purposes.
                                 }
-                            __instance.Pregnancy(girl, man, state: true);
+                        else
+                                {
+                                __instance.Pregnancy(girl, man, state: true);
+                                }
+                   
                         }
 
 
@@ -214,52 +218,56 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void DeliveryPatch(CommonStates __instance)
         {
-
+            String delI = "A_delivery_idle";
+            String delL = "A_delivery_loop";
+            String delE = "A_delivery_end";
+            Transform transform = ((UnityEngine.Component)(object)__instance).transform.Find("Anim");
+            SkeletonAnimation baseAnim = transform?.GetComponent<SkeletonAnimation>();
+            
             NPCMove aMove = __instance.nMove;
             switch (__instance.npcID)
             {
                 case 0: //Yona
-
-                    // Note to self: The following looks to be how I can address and swap animations simply
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_idle") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    
+                    if (baseAnim.AnimationName == delI)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                        baseAnim.AnimationName = "B_dogeza_idle";
                     }
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_loop") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delL)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                        baseAnim.AnimationName = "B_dogeza_idle";
                     }
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_end") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delE)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_dogezaToDown", loop: false);
+                        baseAnim.AnimationName = "B_dogezaToDown";
                     }
-                    break;
+                        break;
                 case 5: //Reika
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_idle") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delI)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_idle", loop: true);
+                        baseAnim.AnimationName = "B_idle";
                     }
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_loop") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delL)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
+                        baseAnim.AnimationName = "A_down_drug_idle";
                     }
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_end") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delE)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "A_down_raped", loop: false);
+                        baseAnim.AnimationName = "A_down_raped";
                     }
                     break;
                 case 6: //Nami
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_idle") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delI)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_idle_weak", loop: true);
+                        baseAnim.AnimationName = "B_idle_weak";
                     }
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_loop") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delL)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
+                        baseAnim.AnimationName = "B_idle_damage";
                     }
-                    if ((aMove.common.anim.state.GetCurrent(0).Animation.Name != "A_delivery_end") && (__instance.sex == CommonStates.SexState.Playing) && (__instance.pregnant[0] != -1))
+                    if (baseAnim.AnimationName == delE)
                     {
-                        aMove.common.anim.state.SetAnimation(0, "B_idle_damagetoweak", loop: false);
+                        baseAnim.AnimationName = "B_idle_damagetoweak";
                     }
                     break;
             }
