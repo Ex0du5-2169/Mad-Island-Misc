@@ -23,11 +23,15 @@ namespace ReikaP.Patches
                     case 0:
                     case 5:
                     case 6:
+                    case 11:
+                    case 12:
+                    case 14:
                     case 113:
                     case 114:
                     case 115:
                     case 89:
                     case 90:
+                    case 91:
                         __result = true;
                         break;
                 }
