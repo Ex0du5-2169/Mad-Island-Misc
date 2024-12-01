@@ -100,13 +100,13 @@ namespace ReikaP.Patches
         public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn, SexManager __instance)
         {
 
-            int mORf = new int();
-            int fORm = new int();
+
             bool canGet = false;
-            mORf = girl.npcID;
-            fORm = man.npcID;
+            CommonStates getsIt = girl;
+            CommonStates givesIt = man;
 
-            switch (mORf)
+
+            switch (getsIt.npcID)
             {
                 case 0:
                 case 5:
@@ -127,11 +127,11 @@ namespace ReikaP.Patches
                 case 91:
                     canGet = false;
                     __result = false;
-                    __instance.Pregnancy(girl, man, state: false);
+                    //__instance.Pregnancy(girl, man, state: false);
 
                     break;
             }
-            switch (fORm)
+            switch (givesIt.npcID)
             {
                 case 0:
                 case 5:
@@ -152,12 +152,12 @@ namespace ReikaP.Patches
                 case 91:
                     canGet = false;
                     __result = false;
-                    __instance.Pregnancy(girl, man, state: false);
+                    //__instance.Pregnancy(girl, man, state: false);
 
                     break;
             }
 
-            if (((!__result) && (canGet == true)) || (raped1))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
+            if ((!__result) || (raped1))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
                     {
 
                         //System.Random random = new System.Random();
@@ -174,7 +174,7 @@ namespace ReikaP.Patches
                         pregStage = 0;
                         //pregStage++;
 
-                        if ((creamed == true) && (isPreg >= 11)) //Tests whether creampied and if the RNG allows it, for now. Later it will test creampied vs the mentstrual stage plus some RNG.
+                        if ((creamed == true) && (isPreg >= 11) && (canGet == true)) //Tests whether creampied and if the RNG allows it, for now. Later it will test creampied vs the mentstrual stage plus some RNG.
                         {
                             pregStage = 12;
                             Debug.Log(pregStage + ": Staging, ignore, not needed yet");
@@ -188,6 +188,10 @@ namespace ReikaP.Patches
 
 
                             //mn.randChar.SetPregnantState(__girl, state: true);
+                            if (getsIt.npcID == 0)
+                                {
+                                    __instance.Pregnancy(givesIt, getsIt, state: true);
+                                }
                             __instance.Pregnancy(girl, man, state: true);
                         }
 
@@ -205,7 +209,7 @@ namespace ReikaP.Patches
     }
 
 
-        /*[HarmonyPatch(typeof(SexManager))]
+        [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
         public static void DeliveryPatch(CommonStates __instance)
@@ -261,7 +265,7 @@ namespace ReikaP.Patches
             }
 
         }
-        [HarmonyPatch(typeof(RandomCharacter))]
+        /*[HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
 
