@@ -205,7 +205,7 @@ namespace ReikaP.Patches
     }
 
 
-        [HarmonyPatch(typeof(SexManager))]
+        /*[HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
         public static void DeliveryPatch(CommonStates __instance)
@@ -260,7 +260,7 @@ namespace ReikaP.Patches
                     break;
             }
 
-        }/*
+        }
         [HarmonyPatch(typeof(RandomCharacter))]
         [HarmonyPatch("SetPregnantState")]
         [HarmonyPrefix]
