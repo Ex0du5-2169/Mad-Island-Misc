@@ -221,6 +221,7 @@ namespace ReikaP.Patches
             String delI = "A_delivery_idle";
             String delL = "A_delivery_loop";
             String delE = "A_delivery_end";
+            
             Transform transform = ((UnityEngine.Component)(object)__instance).transform.Find("Anim");
             SkeletonAnimation baseAnim = transform?.GetComponent<SkeletonAnimation>();
             
@@ -228,44 +229,44 @@ namespace ReikaP.Patches
             switch (__instance.npcID)
             {
                 case 0: //Yona
-                    
-                    if (baseAnim.AnimationName == delI)
+
+                    if (baseAnim.state.SetAnimation(0, delI, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if (baseAnim.AnimationName == delL)
+                    if (baseAnim.state.SetAnimation(0, delL, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
-                    if (baseAnim.AnimationName == delE)
+                    if (baseAnim.state.SetAnimation(0, delE, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_dogezaToDown", loop: true);
                     }
                         break;
                 case 5: //Reika
-                    if (baseAnim.AnimationName == delI)
+                    if (baseAnim.state.SetAnimation(0, delI, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_idle", loop: true);
                     }
-                    if (baseAnim.AnimationName == delL)
+                    if (baseAnim.state.SetAnimation(0, delL, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
                     }
-                    if (baseAnim.AnimationName == delE)
+                    if (baseAnim.state.SetAnimation(0, delE, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "A_down_raped", loop: true);
                     }
                     break;
                 case 6: //Nami
-                    if (baseAnim.AnimationName == delI)
+                    if (baseAnim.state.SetAnimation(0, delI, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_idle_weak", loop: true);
                     }
-                    if (baseAnim.AnimationName == delL)
+                    if (baseAnim.state.SetAnimation(0, delL, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_idle_damage", loop: true);
                     }
-                    if (baseAnim.AnimationName == delE)
+                    if (baseAnim.state.SetAnimation(0, delE, loop: true) == null)
                     {
                         baseAnim.state.SetAnimation(0, "B_idle_damagetoweak", loop: true);
                     }
