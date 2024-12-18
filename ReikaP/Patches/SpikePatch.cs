@@ -28,6 +28,7 @@ namespace ReikaP.Patches
     {
         public static bool raped1 = false;
         public static bool creamed = false;
+        
 
         /*
         void ApplyCustomClothToPlayer(bool looping)
@@ -80,16 +81,33 @@ namespace ReikaP.Patches
         [HarmonyPatch("PlayerRaped")]
         [HarmonyPrefix]
 
-        public static void Raped(CommonStates to, CommonStates from, SexManager __instance)
+        public static void Raped(CommonStates to, CommonStates from, SexManager __instance, ref ManagersScript ___mn)
         {
-
-
-            if (from.anim.AnimationName == "A_Finish_Idle")
+            if (to != null)
             {
-                raped1 = true;
-                __instance.PregnancyCheck(to, from);
+                int index = -1;
+                CommonStates yonaCopy = to;
+                int yonaR = new int();
+                yonaR = yonaCopy.lovers[index].sexCount[2];
+                Debug.Log(yonaR + "copy of current rape count");
+                int newR = new int();
+                newR = to.lovers[index].sexCount[2];
+                Debug.Log(newR + "current rape count");
+                if (from != null)
+                {
+                    index = ___mn.npcMN.GetLoversID(to, from.friendID);
+                }
+
+
+                if (newR > yonaR)
+                {
+                    Debug.Log(raped1 + "Character raped");
+                    raped1 = true;
+                    __instance.PregnancyCheck(to, from);
+                }
             }
 
+                //This section has been an attempt to track the current number of times a character is raped, compare them to a copy in order to detect the moment a change is made and force a pregnancy roll. Currently in need of testing.
         }
 
         [HarmonyPatch(typeof(SexManager))]
@@ -116,6 +134,7 @@ namespace ReikaP.Patches
                 case 113:
                 case 114:
                 case 115:
+                case 116:
                     canGet = true;
                     break;
                 case 1:
@@ -141,6 +160,7 @@ namespace ReikaP.Patches
                 case 113:
                 case 114:
                 case 115:
+                case 116:
                     canGet = true;
                     break;
                 case 1:
@@ -218,9 +238,6 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void DeliveryPatch(CommonStates __instance)
         {
-            String delI = "A_delivery_idle";
-            String delL = "A_delivery_loop";
-            String delE = "A_delivery_end";
             
             Transform transform = ((UnityEngine.Component)(object)__instance).transform.Find("Anim");
             SkeletonAnimation baseAnim = transform?.GetComponent<SkeletonAnimation>();
@@ -230,45 +247,24 @@ namespace ReikaP.Patches
             {
                 case 0: //Yona
 
-                    if (baseAnim.state.SetAnimation(0, delI, loop: true) == null)
+                    if (baseAnim == null)
                     {
+                        Debug.Log("Swapping animation");
                         baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-                    }
-                    if (baseAnim.state.SetAnimation(0, delL, loop: true) == null)
-                    {
-                        baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-                    }
-                    if (baseAnim.state.SetAnimation(0, delE, loop: true) == null)
-                    {
-                        baseAnim.state.SetAnimation(0, "B_dogezaToDown", loop: true);
                     }
                         break;
                 case 5: //Reika
-                    if (baseAnim.state.SetAnimation(0, delI, loop: true) == null)
+                    if (baseAnim == null)
                     {
+                        Debug.Log("Swapping animation");
                         baseAnim.state.SetAnimation(0, "B_idle", loop: true);
-                    }
-                    if (baseAnim.state.SetAnimation(0, delL, loop: true) == null)
-                    {
-                        baseAnim.state.SetAnimation(0, "A_down_drug_idle", loop: true);
-                    }
-                    if (baseAnim.state.SetAnimation(0, delE, loop: true) == null)
-                    {
-                        baseAnim.state.SetAnimation(0, "A_down_raped", loop: true);
                     }
                     break;
                 case 6: //Nami
-                    if (baseAnim.state.SetAnimation(0, delI, loop: true) == null)
+                    if (baseAnim == null)
                     {
-                        baseAnim.state.SetAnimation(0, "B_idle_weak", loop: true);
-                    }
-                    if (baseAnim.state.SetAnimation(0, delL, loop: true) == null)
-                    {
+                        Debug.Log("Swapping animation");
                         baseAnim.state.SetAnimation(0, "B_idle_damage", loop: true);
-                    }
-                    if (baseAnim.state.SetAnimation(0, delE, loop: true) == null)
-                    {
-                        baseAnim.state.SetAnimation(0, "B_idle_damagetoweak", loop: true);
                     }
                     break;
             }

@@ -25,31 +25,7 @@ namespace ReikaP.Patches
 
     internal class SexManagerPatch
     {
-        //The following is probably not needed, only leaving it here to remind myself to look further into it.
-        [HarmonyPatch(typeof(CommonStates))]
-        [HarmonyPatch("Employed")]
-        [HarmonyPrefix]
-        public static void NPCSettingsFix(CommonStates __instance)
-        {
 
-            switch (__instance.npcID)
-            {
-                case 0:
-                    __instance.employ = CommonStates.Employ.Friend;
-
-                    break;
-                case 5:
-                    __instance.employ = CommonStates.Employ.Friend;
-
-                    break;
-                case 6:
-                    __instance.employ = CommonStates.Employ.Friend;
-
-                    break;
-
-            }
-
-        }
         //The following is a test, meant to allow various NPCs to engage in sex automatically.
         [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("SexableNPC")]
@@ -67,6 +43,7 @@ namespace ReikaP.Patches
                     case 113:
                     case 114:
                     case 115:
+                    case 116:
                         __result = true;
                         break;
                 }
