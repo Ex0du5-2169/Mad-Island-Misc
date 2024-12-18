@@ -251,25 +251,24 @@ namespace ReikaP.Patches
             switch (__instance.npcID)
             {
                 case 0: //Yona
-
-                    if (baseAnim == null)
+                    if ((baseAnim.AnimationName == "A_delivery_idle" ||  baseAnim.AnimationName == "A_delivery_loop" || baseAnim.AnimationName == "A_delivery_end") || (baseAnim == null))
                     {
                         Debug.Log("Swapping animation");
-                        baseAnim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
+                            baseAnim.AnimationName = "B_dogeza_idle";
                     }
                         break;
                 case 5: //Reika
-                    if (baseAnim == null)
+                    if ((baseAnim.AnimationName == "A_delivery_idle" || baseAnim.AnimationName == "A_delivery_loop" || baseAnim.AnimationName == "A_delivery_end") || (baseAnim == null))
                     {
                         Debug.Log("Swapping animation");
-                        baseAnim.state.SetAnimation(0, "B_idle", loop: true);
+                        baseAnim.AnimationName = "B_idle";
                     }
                     break;
                 case 6: //Nami
-                    if (baseAnim == null)
+                    if ((baseAnim.AnimationName == "A_delivery_idle" || baseAnim.AnimationName == "A_delivery_loop" || baseAnim.AnimationName == "A_delivery_end") || (baseAnim == null))
                     {
                         Debug.Log("Swapping animation");
-                        baseAnim.state.SetAnimation(0, "B_idle_damage", loop: true);
+                        baseAnim.AnimationName = "B_idle_damage";
                     }
                     break;
             }
