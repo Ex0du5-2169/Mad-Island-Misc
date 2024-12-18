@@ -86,10 +86,10 @@ namespace ReikaP.Patches
             if (to != null)
             {
                 int index = -1;
-                CommonStates yonaCopy = to;
-                int yonaR = new int();
-                yonaR = yonaCopy.lovers[index].sexCount[2];
-                Debug.Log(yonaR + "copy of current rape count");
+                CommonStates charaCopy = to;
+                int oldR = new int();
+                oldR = charaCopy.lovers[index].sexCount[2];
+                Debug.Log(oldR + "copy of current rape count");
                 int newR = new int();
                 newR = to.lovers[index].sexCount[2];
                 Debug.Log(newR + "current rape count");
@@ -97,9 +97,14 @@ namespace ReikaP.Patches
                 {
                     index = ___mn.npcMN.GetLoversID(to, from.friendID);
                 }
+                if (to.npcID == 1)
+                {
+                    charaCopy = null;
+                    
+                }
 
 
-                if (newR > yonaR)
+                if ((newR > oldR) && (charaCopy != null))
                 {
                     Debug.Log(raped1 + "Character raped");
                     raped1 = true;
