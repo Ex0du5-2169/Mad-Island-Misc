@@ -244,31 +244,28 @@ namespace ReikaP.Patches
         public static void DeliveryPatch(CommonStates __instance)
         {
             
-            Transform transform = ((UnityEngine.Component)(object)__instance).transform.Find("Anim");
-            SkeletonAnimation baseAnim = transform?.GetComponent<SkeletonAnimation>();
             
-            NPCMove aMove = __instance.nMove;
             switch (__instance.npcID)
             {
                 case 0: //Yona
-                    if ((baseAnim.AnimationName == "A_delivery_idle" ||  baseAnim.AnimationName == "A_delivery_loop" || baseAnim.AnimationName == "A_delivery_end") || (baseAnim == null))
+                    if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
                     {
                         Debug.Log("Swapping animation");
-                            baseAnim.AnimationName = "B_dogeza_idle";
+                        __instance.anim.AnimationName = "B_dogeza_idle";
                     }
                         break;
                 case 5: //Reika
-                    if ((baseAnim.AnimationName == "A_delivery_idle" || baseAnim.AnimationName == "A_delivery_loop" || baseAnim.AnimationName == "A_delivery_end") || (baseAnim == null))
+                    if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
                     {
                         Debug.Log("Swapping animation");
-                        baseAnim.AnimationName = "B_idle";
+                        __instance.anim.AnimationName = "B_idle";
                     }
                     break;
                 case 6: //Nami
-                    if ((baseAnim.AnimationName == "A_delivery_idle" || baseAnim.AnimationName == "A_delivery_loop" || baseAnim.AnimationName == "A_delivery_end") || (baseAnim == null))
+                    if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
                     {
                         Debug.Log("Swapping animation");
-                        baseAnim.AnimationName = "B_idle_damage";
+                        __instance.anim.AnimationName = "B_idle_damage";
                     }
                     break;
             }
