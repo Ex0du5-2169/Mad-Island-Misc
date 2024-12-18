@@ -31,3 +31,10 @@ Change log:
 
 06/11/2024 09:35 - Basic pregnancy system in-place, needs testing.
                  - Atlas modifying code provided by NM088, needs altering for the purposes of this mod.
+
+18/12/2024 17:08 - Added Merry (Santa) character compatibility.
+                 - Removed a fair amount of old or commented-out code that is no longer necessary.
+                 - Removed useless conditionals from a number of areas.
+                 - Added code to attempt to catch R events and trigger a pregnancy roll when they are detected (needs testing).
+                 - Simplified the animation swapping code and added debug logging to help figure out why it's failing.
+                 - Added code to attempt to address sex automation between tame NPCs, story NPCs and MCs (needs testing).
