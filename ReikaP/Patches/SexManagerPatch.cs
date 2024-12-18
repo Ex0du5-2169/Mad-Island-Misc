@@ -25,7 +25,7 @@ namespace ReikaP.Patches
 
     internal class SexManagerPatch
     {
-
+        //The following is probably not needed, only leaving it here to remind myself to look further into it.
         [HarmonyPatch(typeof(CommonStates))]
         [HarmonyPatch("Employed")]
         [HarmonyPrefix]
@@ -50,7 +50,7 @@ namespace ReikaP.Patches
             }
 
         }
-        //The following is just a test, can remove.
+        //The following is a test, meant to allow various NPCs to engage in sex automatically.
         [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("SexableNPC")]
         [HarmonyPostfix]
@@ -61,7 +61,12 @@ namespace ReikaP.Patches
                 switch (__instance.common.npcID)
                 {
                     case 0:
-
+                    case 1:
+                    case 5:
+                    case 6:
+                    case 113:
+                    case 114:
+                    case 115:
                         __result = true;
                         break;
                 }
@@ -80,11 +85,11 @@ namespace ReikaP.Patches
             switch (npcA.npcID)
             {
                 case 0:
-                    if ((npcB.npcID == 10) && (tmpSex == null) && (npcA.sex == CommonStates.SexState.Playing))
+                    if ((npcB.npcID == 10) && (npcA.sex == CommonStates.SexState.Playing))
                     {
                         tmpSex = UnityEngine.Object.Instantiate(__instance.sexList[2].sexObj[4], pos, Quaternion.identity);
                     }
-                    if ((npcB.npcID == 11) && (tmpSex == null) && (npcA.sex == CommonStates.SexState.Playing))
+                    if ((npcB.npcID == 11) && (npcA.sex == CommonStates.SexState.Playing))
                     {
                         tmpSex = UnityEngine.Object.Instantiate(__instance.sexList[14].sexObj[0], pos, Quaternion.identity);
                     }
@@ -93,11 +98,11 @@ namespace ReikaP.Patches
             switch (npcB.npcID)
             {
                 case 0:
-                    if ((npcA.npcID == 10) && (tmpSex == null) && (npcA.sex == CommonStates.SexState.Playing))
+                    if ((npcA.npcID == 10) && (npcA.sex == CommonStates.SexState.Playing))
                     {
                         tmpSex = UnityEngine.Object.Instantiate(__instance.sexList[2].sexObj[4], pos, Quaternion.identity);
                     }
-                    if ((npcA.npcID == 11) && (tmpSex == null) && (npcA.sex == CommonStates.SexState.Playing))
+                    if ((npcA.npcID == 11) && (npcA.sex == CommonStates.SexState.Playing))
                     {
                         tmpSex = UnityEngine.Object.Instantiate(__instance.sexList[14].sexObj[0], pos, Quaternion.identity);
                     }
@@ -105,34 +110,6 @@ namespace ReikaP.Patches
                     
             }
         }
-        /*[HarmonyPatch(typeof(RandomCharacter))]
-        [HarmonyPatch("SetPregnantState")]
-        [HarmonyPrefix]
-
-        public static void BodyFix(RandomCharacter __instance, CommonStates common)
-        {
-            CommonStates tempGirl = common;
-            tempGirl.npcID = 15;
-            
-            if ((common.npcID != 15) && (common.npcID != 16))
-            {
-                switch (common.npcID)
-                {
-                    case 0:
-                    case 5:
-                    case 6:
-                    case 113:
-                    case 114:
-                    case 115:
-                        Attachment slot1 = tempGirl.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        break;
-                }
-
-            }
-
-
-        }*/
     }
 }
 
