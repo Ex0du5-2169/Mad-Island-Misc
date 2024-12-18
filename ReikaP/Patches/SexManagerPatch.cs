@@ -49,27 +49,7 @@ namespace ReikaP.Patches
 
             }
 
-        }/*
-
-        
-        [HarmonyPatch(typeof(NPCMove))]
-        [HarmonyPatch("PregnancyCheck")]
-        [HarmonyPostfix]
-        public static void PregFix(SexManager __instance, ref bool __result, CommonStates girl)
-        {
-
-            int npcID = girl.npcID;
-            if (!__result)
-            {
-                switch (npcID)
-                {
-                    case 0:
-
-                        __result = true;
-                        break;
-                }
-            }
-        }*/
+        }
         //The following is just a test, can remove.
         [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("SexableNPC")]
