@@ -15,7 +15,7 @@ namespace ReikaP.Patches
 
         public static void PerfumeFix(NPCManager __instance, ref bool __result, CommonStates common)
         {
-
+            //Should be fairly obvious, allows use of the perfume item on any NPC added to this list.
             if (!__result)
             {
                 switch (common.npcID)

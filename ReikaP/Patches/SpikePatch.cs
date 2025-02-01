@@ -30,52 +30,6 @@ namespace ReikaP.Patches
         public static bool creamed = false;
         
 
-        /*
-        void ApplyCustomClothToPlayer(bool looping)
-        {
-            if (looping)
-                Logger.Log("Part updated");
-
-            if (playerCommonState == null)
-            {
-                Logger.LogError("Player's CommonState is null.");
-                return;
-            }
-
-            SkeletonAnimation skeletonAnim = playerCommonState.anim;
-
-            if (skeletonAnim == null)
-            {
-                Logger.LogError("SkeletonAnimation component not found on the player's CommonStates.");
-                return;
-            }
-            List<string> partsToApply = new List<string> { "body_preg" };
-            SkinManager.Instance.ApplyModSkin("yona_reskin001", "yona", skeletonAnim, partsToApply, true);
-        }*/
-
-        /*[HarmonyPatch(typeof(SexManager))]
-        [HarmonyPatch("SexCountDataChange")]
-        [HarmonyPrefix]
-
-        public static void DataChange(CommonStates to, CommonStates from, SexCountState sexState, ref ManagersScript ___mn)
-        {
-            int index = -1;
-            to.LoveChange(from, 0f);
-            int currentR = new int();
-            int currentC = new int();
-            //int currentT = new int();
-            currentR = to.lovers[index].sexCount[2];
-            currentC = to.lovers[index].sexCount[6];
-            //currentT = to.lovers[index].sexCount[4];
-            if (from != null)
-            {
-                index = ___mn.npcMN.GetLoversID(to, from.friendID);
-            }
-            if ((currentR == to.lovers[index].sexCount[2]++) || (currentC == to.lovers[index].sexCount[6]++))
-            {
-                creamed = true;
-            }
-        }*/
 
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("PlayerRaped")]
@@ -85,6 +39,8 @@ namespace ReikaP.Patches
         {
             if (to != null)
             {
+
+                //Likkely going to remove this section since it's meant to check whether Yona gets raped and then trigger a pregnancy check, since the devs are adding Yona preg natively, this will be useless. 
                 int index = -1;
                 CommonStates charaCopy = to;
                 int oldR = new int();
@@ -243,7 +199,7 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
         public static void DeliveryPatch(CommonStates __instance)
         {
-            
+            //Ignore the following, needs completely re-writing, since I look back now it's pretty obvious why it's not working. Oops.
             
             switch (__instance.npcID)
             {

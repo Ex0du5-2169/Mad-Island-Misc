@@ -26,7 +26,7 @@ namespace ReikaP.Patches
     internal class SexManagerPatch
     {
 
-        //The following is a test, meant to allow various NPCs to engage in sex automatically.
+        //The following is a test, meant to allow various NPCs to engage in sex automatically. Only half-finished currently, likely going to remove it in favour of a hook into Yotan's framework.
         [HarmonyPatch(typeof(NPCMove))]
         [HarmonyPatch("SexableNPC")]
         [HarmonyPostfix]
