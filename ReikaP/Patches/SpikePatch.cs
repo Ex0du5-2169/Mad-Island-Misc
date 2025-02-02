@@ -167,7 +167,7 @@ namespace ReikaP.Patches
                             Debug.Log(girl.pregnant[0] + ": Return ID of sperm donor");
                             ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
 
-
+                    
 
                         if (givesIt.npcID == 0)
                                 {
@@ -197,31 +197,31 @@ namespace ReikaP.Patches
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
-        public static void DeliveryPatch(CommonStates __instance)
+        public static void DeliveryPatch(SexManager __instance, CommonStates common)
         {
-            //Ignore the following, needs completely re-writing, since I look back now it's pretty obvious why it's not working. Oops.
-            
-            switch (__instance.npcID)
+            //Ignore the following, work in-progress.
+            string anim1 = common.anim.AnimationState.ToString();
+            switch (common.npcID)
             {
                 case 0: //Yona
-                    if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
+                    if (anim1 == null)
                     {
                         Debug.Log("Swapping animation");
-                        __instance.anim.AnimationName = "B_dogeza_idle";
+                        common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
                     }
                         break;
                 case 5: //Reika
                     if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
                     {
                         Debug.Log("Swapping animation");
-                        __instance.anim.AnimationName = "B_idle";
+                        common.anim.state.SetAnimation(0, "B_idle", loop: true);
                     }
                     break;
                 case 6: //Nami
                     if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
                     {
                         Debug.Log("Swapping animation");
-                        __instance.anim.AnimationName = "B_idle_damage";
+                        common.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
                     }
                     break;
             }
