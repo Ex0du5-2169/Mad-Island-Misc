@@ -211,14 +211,14 @@ namespace ReikaP.Patches
                     }
                         break;
                 case 5: //Reika
-                    if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
+                    if (anim1 == null)
                     {
                         Debug.Log("Swapping animation");
                         common.anim.state.SetAnimation(0, "B_idle", loop: true);
                     }
                     break;
                 case 6: //Nami
-                    if ((__instance.anim.AnimationName == "A_delivery_idle") || (__instance.anim.AnimationName == "A_delivery_loop") || (__instance.anim.AnimationName == "A_delivery_end") || (__instance.anim.AnimationName == null))
+                    if (anim1 == null)
                     {
                         Debug.Log("Swapping animation");
                         common.anim.state.SetAnimation(0, "B_idle_damage", loop: true);

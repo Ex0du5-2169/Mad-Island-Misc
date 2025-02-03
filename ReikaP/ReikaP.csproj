@@ -41,6 +41,9 @@
     <Reference Include="BepInEx">
       <HintPath>G:\Other stuff\Mad_Island_Steam\Mad Island\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
+    <Reference Include="ExtendedHSystem">
+      <HintPath>H:\SteamLibrary\steamapps\common\Mad Island\BepInEx\plugins\ExtendedHSystem.dll</HintPath>
+    </Reference>
     <Reference Include="spine-unity, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>G:\Other stuff\Mad_Island_Steam\Mad Island\Mad Island_Data\Managed\spine-unity.dll</HintPath>
