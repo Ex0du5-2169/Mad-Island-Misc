@@ -181,64 +181,60 @@ namespace ReikaP.Patches
         public static void DeliveryPatch(SexManager __instance, CommonStates common)
         {
             //Ignore the following, work in-progress.
-            string anim1 = common.anim.AnimationState.ToString();
-            switch (common.npcID)
+            Transform transform = __instance.transform;
+            Spine.Animation animation = transform.GetComponent<Spine.Animation>();
+            while (animation.Name == "A_delivery_idle")
             {
-                case 0: //Yona
-                    if (anim1 == null)
-                    {
-                        Debug.Log("Swapping animation");
-                        common.anim.state.SetAnimation(0, "B_dogeza_idle", loop: true);
-                    }
+                switch (common.npcID)
+                {
+
+                    case 5: //Reika
+                        {
+                            Debug.Log("Swapping animation");
+                            common.anim.state.SetAnimation(0, "B_idle", loop: true);
+                        }
                         break;
-                case 5: //Reika
-                    if (anim1 == null)
-                    {
-                        Debug.Log("Swapping animation");
-                        common.anim.state.SetAnimation(0, "B_idle", loop: true);
-                    }
-                    break;
-                case 6: //Nami
-                    if (anim1 == null)
-                    {
-                        Debug.Log("Swapping animation");
-                        common.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
-                    }
-                    break;
+                    case 6: //Nami
+                        {
+                            Debug.Log("Swapping animation");
+                            common.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
+                        }
+                        break;
+                }
             }
 
         }
-        /*[HarmonyPatch(typeof(RandomCharacter))]
-        [HarmonyPatch("SetPregnantState")]
-        [HarmonyPrefix]
+            /*[HarmonyPatch(typeof(RandomCharacter))]
+            [HarmonyPatch("SetPregnantState")]
+            [HarmonyPrefix]
 
-        public static void PregStatePatch(CommonStates common)
-        {
+            public static void PregStatePatch(CommonStates common)
+            {
 
-                if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] < 0))
-                {
-                CommonStates common1 = new CommonStates();
-                common1.npcID = 15;
-                Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                switch (common.npcID)
+                    if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] < 0))
                     {
-                        case 0: //Yona
-                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                            break;
-                        case 5: //Reika
-                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                            
-                            break;
-                        case 6: //Nami
-                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                            break;
+                    CommonStates common1 = new CommonStates();
+                    common1.npcID = 15;
+                    Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                    switch (common.npcID)
+                        {
+                            case 0: //Yona
+                                common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                                Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                                break;
+                            case 5: //Reika
+                                common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                                Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+
+                                break;
+                            case 6: //Nami
+                                common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                                Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                                break;
+                        }
+
                     }
 
-                }
-            
-        }*/
-    }
+            }*/
+        }
 }
