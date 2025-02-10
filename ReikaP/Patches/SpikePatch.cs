@@ -181,46 +181,55 @@ namespace ReikaP.Patches
         public static void DeliveryPatch(SexManager __instance, CommonStates common)
         {
             //Ignore the following, work in-progress.
+
             Transform transform = __instance.transform;
             SkeletonAnimation animation = transform.Find("A_delivery_idle").GetComponent<SkeletonAnimation>();
-            if (animation == null)
-            {
-                animation.AnimationName = "B_idle";
-            }
+            SkeletonAnimation animationEnd = transform.Find("B_idle").GetComponent<SkeletonAnimation>();
+            SkeletonAnimation animation2 = transform.Find("A_delivery_loop").GetComponent<SkeletonAnimation>();
+            SkeletonAnimation animation3 = transform.Find("A_delivery_end").GetComponent<SkeletonAnimation>();
+
+            Spine.AnimationState sourceState = animationEnd.AnimationState;
+            TrackEntry entry = sourceState.SetAnimation(0, "B_idle", false);
+            TrackEntry target = animation.AnimationState.SetAnimation(0, entry.Animation, false);
+            animation.AnimationName = "A_delivery_idle";
+            TrackEntry target2 = animation2.AnimationState.SetAnimation(0, entry.Animation, false);
+            animation2.AnimationName = "A_delivery_loop";
+            TrackEntry target3 = animation3.AnimationState.SetAnimation(0, entry.Animation, false);
+            animation3.AnimationName = "A_delivery_end";
         }
 
-    
-    /*[HarmonyPatch(typeof(RandomCharacter))]
-    [HarmonyPatch("SetPregnantState")]
-    [HarmonyPrefix]
 
-    public static void PregStatePatch(CommonStates common)
-    {
+        /*[HarmonyPatch(typeof(RandomCharacter))]
+        [HarmonyPatch("SetPregnantState")]
+        [HarmonyPrefix]
 
-            if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] < 0))
-            {
-            CommonStates common1 = new CommonStates();
-            common1.npcID = 15;
-            Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-            switch (common.npcID)
+        public static void PregStatePatch(CommonStates common)
+        {
+
+                if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] < 0))
                 {
-                    case 0: //Yona
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
-                    case 5: //Reika
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                CommonStates common1 = new CommonStates();
+                common1.npcID = 15;
+                Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+                switch (common.npcID)
+                    {
+                        case 0: //Yona
+                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                            break;
+                        case 5: //Reika
+                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
 
-                        break;
-                    case 6: //Nami
-                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                        break;
+                            break;
+                        case 6: //Nami
+                            common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                            Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                            break;
+                    }
+
                 }
 
-            }
-
-    }*/
-}
+        }*/
+    }
 }
