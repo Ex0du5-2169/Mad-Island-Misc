@@ -170,9 +170,9 @@ namespace ReikaP.Patches
                         creamed = false;
                         raped1 = false;
                         isPreg = 0;
-                    }
+            }
 
-    }
+        }
 
 
         [HarmonyPatch(typeof(SexManager))]
@@ -182,59 +182,45 @@ namespace ReikaP.Patches
         {
             //Ignore the following, work in-progress.
             Transform transform = __instance.transform;
-            Spine.Animation animation = transform.GetComponent<Spine.Animation>();
-            while (animation.Name == "A_delivery_idle")
+            SkeletonAnimation animation = transform.Find("A_delivery_idle").GetComponent<SkeletonAnimation>();
+            if (animation == null)
             {
-                switch (common.npcID)
-                {
+                animation.AnimationName = "B_idle";
+            }
+        }
 
+    
+    /*[HarmonyPatch(typeof(RandomCharacter))]
+    [HarmonyPatch("SetPregnantState")]
+    [HarmonyPrefix]
+
+    public static void PregStatePatch(CommonStates common)
+    {
+
+            if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] < 0))
+            {
+            CommonStates common1 = new CommonStates();
+            common1.npcID = 15;
+            Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
+            switch (common.npcID)
+                {
+                    case 0: //Yona
+                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+                        break;
                     case 5: //Reika
-                        {
-                            Debug.Log("Swapping animation");
-                            common.anim.state.SetAnimation(0, "B_idle", loop: true);
-                        }
+                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
+
                         break;
                     case 6: //Nami
-                        {
-                            Debug.Log("Swapping animation");
-                            common.anim.state.SetAnimation(0, "B_idle_damage", loop: true);
-                        }
+                        common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
+                        Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
                         break;
                 }
+
             }
 
-        }
-            /*[HarmonyPatch(typeof(RandomCharacter))]
-            [HarmonyPatch("SetPregnantState")]
-            [HarmonyPrefix]
-
-            public static void PregStatePatch(CommonStates common)
-            {
-
-                    if ((common.anim.skeleton.FindSlot("Body_preg") == null) && (common.pregnant[1] < 0))
-                    {
-                    CommonStates common1 = new CommonStates();
-                    common1.npcID = 15;
-                    Attachment slot1 = common1.anim.skeleton.GetAttachment("Body_preg", "Body_preg");
-                    switch (common.npcID)
-                        {
-                            case 0: //Yona
-                                common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                                Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                                break;
-                            case 5: //Reika
-                                common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                                Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-
-                                break;
-                            case 6: //Nami
-                                common.anim.skeleton.SetAttachment("Body_preg", slot1.Name);
-                                Debug.Log(common.anim.skeleton.GetAttachment("Body_preg", "Body_preg"));
-                                break;
-                        }
-
-                    }
-
-            }*/
-        }
+    }*/
+}
 }

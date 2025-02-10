@@ -81,3 +81,5 @@ C:\Users\mutex\source\repos\ReikaP\ReikaP\obj\Debug\ReikaP.csproj.CoreCompileInp
 C:\Users\mutex\source\repos\ReikaP\ReikaP\obj\Debug\ReikaP.csproj.Up2Date
 C:\Users\mutex\source\repos\ReikaP\ReikaP\obj\Debug\ReikaP.dll
 C:\Users\mutex\source\repos\ReikaP\ReikaP\obj\Debug\ReikaP.pdb
+C:\Users\mutex\source\repos\ReikaP\ReikaP\bin\Debug\ExtendedHSystem.dll
+C:\Users\mutex\source\repos\ReikaP\ReikaP\bin\Debug\YotanModCore.dll
