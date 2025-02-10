@@ -202,7 +202,7 @@ namespace ReikaP.Patches
                         yield return ___mn.npcMN.GenSpawn(24, common.gameObject, null, 0f, null, tmpUse: true);
                     }*/
                     
-            }
+            
         }
 
 
