@@ -28,8 +28,15 @@ namespace ReikaP.Patches
     {
         public static bool raped1 = false;
         public static bool creamed = false;
-        
 
+        [HarmonyPatch(typeof(SexManager))]
+        [HarmonyPatch("CommonRapesNPC")]
+        [HarmonyPrefix]
+        public static void NPCRaped(CommonStates npcA, CommonStates npcB, SexManager __instance)
+        {
+            __instance.PregnancyCheck(npcB, npcA);
+            raped1 = true;
+        }
 
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("PlayerRaped")]
@@ -37,38 +44,10 @@ namespace ReikaP.Patches
 
         public static void Raped(CommonStates to, CommonStates from, SexManager __instance, ref ManagersScript ___mn)
         {
-            if (to != null)
-            {
 
-                //Likkely going to remove this section since it's meant to check whether Yona gets raped and then trigger a pregnancy check, since the devs are adding Yona preg natively, this will be useless. 
-                int index = -1;
-                CommonStates charaCopy = to;
-                int oldR = new int();
-                oldR = charaCopy.lovers[index].sexCount[2];
-                Debug.Log(oldR + "copy of current rape count");
-                int newR = new int();
-                newR = to.lovers[index].sexCount[2];
-                Debug.Log(newR + "current rape count");
-                if (from != null)
-                {
-                    index = ___mn.npcMN.GetLoversID(to, from.friendID);
-                }
-                if (to.npcID == 1)
-                {
-                    charaCopy = null;
-                    
-                }
-
-
-                if ((newR > oldR) && (charaCopy != null))
-                {
-                    Debug.Log(raped1 + "Character raped");
-                    raped1 = true;
-                    __instance.PregnancyCheck(to, from);
-                }
-            }
-
-                //This section has been an attempt to track the current number of times a character is raped, compare them to a copy in order to detect the moment a change is made and force a pregnancy roll. Currently in need of testing.
+            __instance.PregnancyCheck(to, from);
+            raped1 = true;
+            //This section attaempts to trigger a pregnancy check upon the player being raped.
         }
 
         [HarmonyPatch(typeof(SexManager))]
@@ -141,14 +120,10 @@ namespace ReikaP.Patches
             if ((!__result) || (raped1))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
                     {
 
-                        //System.Random random = new System.Random();
-                        //eggs = random.Next(8);
-                        //Debug.Log(egged);
-                        //Debug.Log(eggs);
+
                         creamed = true; //Must have taken an action that gives the creampie state, for now we have given it that state through other means.
                         Debug.Log(creamed + ": Creampied");
 
-                        //System.Random random = new System.Random();
                         int isPreg = UnityEngine.Random.Range(0, 15); //Set a random range for preg chance
                         Debug.Log(isPreg + ": Random int, must be > 11 for pregnancy");
                         int pregStage = new int(); //eventually will become part of a mentstrual system, for now it's only used to hold an int for the game's preg system to receive.
