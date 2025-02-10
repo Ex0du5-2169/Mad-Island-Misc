@@ -61,7 +61,7 @@ namespace ReikaP.Patches
         [HarmonyPrefix]
 
 
-        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ref ManagersScript ___mn, SexManager __instance)
+        public static void CreamSex(CommonStates girl, ref bool __result, CommonStates man, ManagersScript ___mn, SexManager __instance)
         {
 
 
@@ -178,13 +178,13 @@ namespace ReikaP.Patches
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
-        public static void DeliveryPatch(SexManager __instance, CommonStates common)
+        public static void DeliveryPatch(SexManager __instance, CommonStates common, ManagersScript ___mn)
         {
             //Ignore the following, work in-progress.
 
             Transform transform = __instance.transform;
-            SkeletonAnimation animation = transform.Find("A_delivery_idle").GetComponent<SkeletonAnimation>();
             SkeletonAnimation animationEnd = transform.Find("B_idle").GetComponent<SkeletonAnimation>();
+            SkeletonAnimation animation = transform.Find("A_delivery_idle").GetComponent<SkeletonAnimation>();
             SkeletonAnimation animation2 = transform.Find("A_delivery_loop").GetComponent<SkeletonAnimation>();
             SkeletonAnimation animation3 = transform.Find("A_delivery_end").GetComponent<SkeletonAnimation>();
 
@@ -196,6 +196,13 @@ namespace ReikaP.Patches
             animation2.AnimationName = "A_delivery_loop";
             TrackEntry target3 = animation3.AnimationState.SetAnimation(0, entry.Animation, false);
             animation3.AnimationName = "A_delivery_end";
+
+                 /*   if (common.pregnant[0] == 1)
+                    {
+                        yield return ___mn.npcMN.GenSpawn(24, common.gameObject, null, 0f, null, tmpUse: true);
+                    }*/
+                    
+            }
         }
 
 
