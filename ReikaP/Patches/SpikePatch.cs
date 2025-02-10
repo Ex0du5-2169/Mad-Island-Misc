@@ -42,11 +42,17 @@ namespace ReikaP.Patches
         [HarmonyPatch("PlayerRaped")]
         [HarmonyPrefix]
 
-        public static void Raped(CommonStates to, CommonStates from, SexManager __instance, ref ManagersScript ___mn)
+        public static void PRaped(CommonStates to, CommonStates from, SexManager __instance, ref ManagersScript ___mn)
         {
-
-            __instance.PregnancyCheck(to, from);
-            raped1 = true;
+            switch (to.npcID)
+            {
+                case 0:
+                    __instance.PregnancyCheck(to, from);
+                    raped1 = true;
+                    break;
+                case 1:
+                    break;
+            }
             //This section attaempts to trigger a pregnancy check upon the player being raped.
         }
 
