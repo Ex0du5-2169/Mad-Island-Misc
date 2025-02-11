@@ -16,11 +16,13 @@ using Spine;
 namespace ReikaP
 {
     [BepInPlugin(modGUID, modName, modVersion)]
+    [BepInDependency("HFramework", "1.0.0")]
     public class ReikaBase : BaseUnityPlugin
     {
         private const string modGUID = "Ex.MadIslandUPE";
         private const string modName = "Ex Universal Pregnancy Enabler";
         private const string modVersion = "1.0.0";
+
 
         private readonly Harmony harmony = new Harmony(modGUID);
 

@@ -20,6 +20,8 @@ using Spine.Unity;
 using Spine;
 using ReikaP;
 using static SexManager;
+using ExtendedHSystem.Scenes;
+using ExtendedHSystem;
 
 namespace ReikaP.Patches
 {
@@ -28,14 +30,17 @@ namespace ReikaP.Patches
     {
         public static bool raped1 = false;
         public static bool creamed = false;
+        public static DefaultSceneController controller = new DefaultSceneController();
 
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("CommonRapesNPC")]
         [HarmonyPrefix]
-        public static void NPCRaped(CommonStates npcA, CommonStates npcB, SexManager __instance)
+        public static void NPCRaped(CommonStates npcA, CommonStates npcB, SexManager __instance, ref ManagersScript ___mn)
         {
             __instance.PregnancyCheck(npcB, npcA);
+            ___mn.uiMN.FriendHealthCheck(npcB);
             raped1 = true;
+            
         }
 
         [HarmonyPatch(typeof(SexManager))]
@@ -48,6 +53,7 @@ namespace ReikaP.Patches
             {
                 case 0:
                     __instance.PregnancyCheck(to, from);
+                    ___mn.uiMN.FriendHealthCheck(to);
                     raped1 = true;
                     break;
                 case 1:
@@ -123,9 +129,13 @@ namespace ReikaP.Patches
                     break;
             }
 
-            if ((!__result) || (raped1))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
+            if (!__result)//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
                     {
-
+                        if (raped1)
+                            {
+                            Debug.Log(raped1 + "This is a test for rape preg stuff");
+                            creamed = true;
+                            }
 
                         creamed = true; //Must have taken an action that gives the creampie state, for now we have given it that state through other means.
                         Debug.Log(creamed + ": Creampied");
@@ -174,35 +184,22 @@ namespace ReikaP.Patches
 
         }
 
-
+        
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
-        public static void DeliveryPatch(SexManager __instance, CommonStates common, ManagersScript ___mn)
+        public static void DeliveryPatch(SexManager __instance, CommonStates common)
         {
             //Ignore the following, work in-progress.
-
+            WorkPlace tmpWorkPlace = new WorkPlace();
+            SexPlace tmpSexPlace = new SexPlace();
             Transform transform = __instance.transform;
-            SkeletonAnimation animationEnd = transform.Find("B_idle").GetComponent<SkeletonAnimation>();
-            SkeletonAnimation animation = transform.Find("A_delivery_idle").GetComponent<SkeletonAnimation>();
-            SkeletonAnimation animation2 = transform.Find("A_delivery_loop").GetComponent<SkeletonAnimation>();
-            SkeletonAnimation animation3 = transform.Find("A_delivery_end").GetComponent<SkeletonAnimation>();
+            SkeletonAnimation animation = transform.GetComponent<SkeletonAnimation>();
 
-            Spine.AnimationState sourceState = animationEnd.AnimationState;
-            TrackEntry entry = sourceState.SetAnimation(0, "B_idle", false);
-            TrackEntry target = animation.AnimationState.SetAnimation(0, entry.Animation, false);
-            animation.AnimationName = "A_delivery_idle";
-            TrackEntry target2 = animation2.AnimationState.SetAnimation(0, entry.Animation, false);
-            animation2.AnimationName = "A_delivery_loop";
-            TrackEntry target3 = animation3.AnimationState.SetAnimation(0, entry.Animation, false);
-            animation3.AnimationName = "A_delivery_end";
-
-                 /*   if (common.pregnant[0] == 1)
-                    {
-                        yield return ___mn.npcMN.GenSpawn(24, common.gameObject, null, 0f, null, tmpUse: true);
-                    }*/
-                    
-            
+                    Delivery delivery = new Delivery(common, tmpWorkPlace, tmpSexPlace);
+                    controller.PlayTimedStep(delivery, animation, "B_idle", 30f);
+                    delivery.Run();
+            return;
         }
 
 
