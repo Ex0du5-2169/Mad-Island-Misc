@@ -30,7 +30,6 @@ namespace ReikaP.Patches
     {
         public static bool raped1 = false;
         public static bool creamed = false;
-        public static DefaultSceneController controller = new DefaultSceneController();
 
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("CommonRapesNPC")]
@@ -184,7 +183,7 @@ namespace ReikaP.Patches
 
         }
 
-        
+        /*
         [HarmonyPatch(typeof(SexManager))]
         [HarmonyPatch("Delivery")]
         [HarmonyPrefix]
@@ -200,7 +199,7 @@ namespace ReikaP.Patches
                     controller.PlayTimedStep(delivery, animation, "B_idle", 30f);
                     delivery.Run();
             return;
-        }
+        }*/
 
 
         /*[HarmonyPatch(typeof(RandomCharacter))]

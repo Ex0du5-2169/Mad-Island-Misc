@@ -26,6 +26,8 @@ namespace ReikaP.Patches
                     case 11:
                     case 12:
                     case 14:
+                    case 25:
+                    case 35:
                     case 113:
                     case 114:
                     case 115:
