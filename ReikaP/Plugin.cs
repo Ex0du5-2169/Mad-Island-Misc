@@ -16,7 +16,7 @@ using Spine;
 namespace ReikaP
 {
     [BepInPlugin(modGUID, modName, modVersion)]
-    [BepInDependency("HFramework", "1.0.0")]
+    
     public class ReikaBase : BaseUnityPlugin
     {
         private const string modGUID = "Ex.MadIslandUPE";
