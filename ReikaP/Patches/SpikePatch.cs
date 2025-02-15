@@ -20,8 +20,7 @@ using Spine.Unity;
 using Spine;
 using ReikaP;
 using static SexManager;
-using ExtendedHSystem.Scenes;
-using ExtendedHSystem;
+
 
 namespace ReikaP.Patches
 {
@@ -71,6 +70,7 @@ namespace ReikaP.Patches
 
 
             bool canGet = false;
+            bool canGet2 = false;
             CommonStates getsIt = girl;
             CommonStates givesIt = man;
 
@@ -81,7 +81,10 @@ namespace ReikaP.Patches
                 case 5:
                 case 6:
                 case 17:
+                case 19:
+                case 44:
                 case 90:
+                case 110:
                 case 113:
                 case 114:
                 case 115:
@@ -92,10 +95,14 @@ namespace ReikaP.Patches
                 case 10:
                 case 11:
                 case 12:
+                case 13:
                 case 14:
+                case 18:
+                case 25:
+                case 35:
                 case 89:
                 case 91:
-                    canGet = false;
+                    canGet2 = false;
                     __result = false;
                     //__instance.Pregnancy(girl, man, state: false);
 
@@ -107,7 +114,10 @@ namespace ReikaP.Patches
                 case 5:
                 case 6:
                 case 17:
+                case 19:
+                case 44:
                 case 90:
+                case 110:
                 case 113:
                 case 114:
                 case 115:
@@ -118,10 +128,14 @@ namespace ReikaP.Patches
                 case 10:
                 case 11:
                 case 12:
+                case 13:
                 case 14:
+                case 18:
+                case 25:
+                case 35:
                 case 89:
                 case 91:
-                    canGet = false;
+                    canGet2 = false;
                     __result = false;
                     //__instance.Pregnancy(girl, man, state: false);
 
@@ -145,7 +159,7 @@ namespace ReikaP.Patches
                         pregStage = 0;
                         //pregStage++;
 
-                        if ((creamed == true) && (isPreg >= 11) && (canGet == true)) //Tests whether creampied and if the RNG allows it, for now. Later it will test creampied vs the mentstrual stage plus some RNG.
+                        if ((creamed == true) && (isPreg >= 11) && (canGet == true) && (canGet2 == false)) //Tests whether creampied and if the RNG allows it, for now. Later it will test creampied vs the mentstrual stage plus some RNG.
                         {
                             pregStage = 12;
                             Debug.Log(pregStage + ": Staging, ignore, not needed yet");
@@ -153,8 +167,6 @@ namespace ReikaP.Patches
                             Debug.Log(__result + ": Pregnant or not");
                             girl.pregnant[1] = pregStage; //Trigger the game's pregnancy system.
                             girl.pregnant[0] = man.friendID; //Pregnancy system requires the father be set.
-                            Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
-                            Debug.Log(girl.pregnant[0] + ": Return ID of sperm donor");
                             ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
 
                     
@@ -173,11 +185,16 @@ namespace ReikaP.Patches
 
                         if (girl.pregnant[1] == 12)
                         {
+                            Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
+                            Debug.Log(girl.pregnant[0] + ": Return ID of sperm donor");
+                            __instance.Pregnancy(girl, man, state: true);
                             ___mn.sound.GoSound(108, girl.transform.position, randomPitch: true); //play sound on successful impregnation.
                         }
                         pregStage = 0; //Reset used variables, just in case.
                         creamed = false;
                         raped1 = false;
+                        getsIt = null;
+                        givesIt = null;
                         isPreg = 0;
             }
 
