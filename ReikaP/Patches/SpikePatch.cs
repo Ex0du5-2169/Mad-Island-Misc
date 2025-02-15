@@ -167,27 +167,22 @@ namespace ReikaP.Patches
                             Debug.Log(__result + ": Pregnant or not");
                             girl.pregnant[1] = pregStage; //Trigger the game's pregnancy system.
                             girl.pregnant[0] = man.friendID; //Pregnancy system requires the father be set.
-                            ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
+                            
 
-                    
 
-                        if (givesIt.npcID == 0)
-                                {
+
+                            if ((givesIt.npcID == 0) && (raped1 == false))
+                            {
                                 __instance.Pregnancy(givesIt, getsIt, state: true); //This section checks for Yona initiating sex and changes her to receiver for pregnancy purposes.
-                                }
-                        else
-                                {
-                                __instance.Pregnancy(girl, man, state: true);
-                                }
-                   
+                            }
+
                         }
-
-
-                        if (girl.pregnant[1] == 12)
+                        if ((girl.pregnant[1] == 12) && (girl.npcID != 0))
                         {
                             Debug.Log(girl.pregnant[1] + ": Default pregnancy state");
                             Debug.Log(girl.pregnant[0] + ": Return ID of sperm donor");
                             __instance.Pregnancy(girl, man, state: true);
+                            ___mn.uiMN.FriendHealthCheck(girl); //Trigger a health check to update the UI panels.
                             ___mn.sound.GoSound(108, girl.transform.position, randomPitch: true); //play sound on successful impregnation.
                         }
                         pregStage = 0; //Reset used variables, just in case.
