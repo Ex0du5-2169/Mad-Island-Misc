@@ -142,11 +142,11 @@ namespace ReikaP.Patches
                     break;
             }
 
-            if (!__result)//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
+            if ((!__result) && (girl.pregnant[1] == 0))//If the game's own result is set as false we take over, this does have the side effect of adding a 2nd roll of the dice for native women/girls
                     {
                         if (raped1)
                             {
-                            Debug.Log(raped1 + "This is a test for rape preg stuff");
+                            Debug.Log(raped1 + ": This is a test for rape preg stuff, ignore");
                             creamed = true;
                             }
 
@@ -195,6 +195,8 @@ namespace ReikaP.Patches
                         raped1 = false;
                         getsIt = null;
                         givesIt = null;
+                        canGet = false;
+                        canGet2 = false;
                         isPreg = 0;
             }
 
